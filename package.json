@@ -1,0 +1,55 @@
+{
+  "name": "frombusktilldawn",
+  "version": "1.0.0",
+  "description": "Contract project to build a street performer tracker",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack/prod.js",
+    "react-dev": "webpack --config webpack/base.js --watch",
+    "start": "npx nodemon server/index.js",
+    "start-prod": "node server/index.js",
+    "bundle-dev": "npm run react-dev & npm start",
+    "bundle-prod": "npm run build & npm run start-prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marty-and-the-Martians/FromBuskTillDawn.git"
+  },
+  "author": "Alisha Edington, Keanu Hasty, JJ Marquis, Jordan Trimarchi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Marty-and-the-Martians/FromBuskTillDawn/issues"
+  },
+  "homepage": "https://github.com/Marty-and-the-Martians/FromBuskTillDawn#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.2",
+    "nodemon": "^2.0.12",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "terser-webpack-plugin": "^5.1.4",
+    "webpack-merge": "^5.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-loader": "^6.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.1.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}

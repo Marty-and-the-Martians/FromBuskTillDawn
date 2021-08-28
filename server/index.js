@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const bodyparser = require('body-parser');
+const passport = require('passport');
 
 const router = require('./routes');
 // const queries = require('../database/schema.js'); // Emma's guide
@@ -15,6 +15,10 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // if data is coming in as an empty object, consider exetneded: true
+// Passport middleware
+app.use(passport.initialize());
+// Passport config
+require('../config/passport')(passport);
 
 app.use(cors());
 

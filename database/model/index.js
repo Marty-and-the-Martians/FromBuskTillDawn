@@ -1,31 +1,32 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   performer: {
     type: Boolean,
     default: false,
-    required: true
+    required: true,
   },
   zipcode: {
     type: Number,
-    required: true
+    required: true,
   },
   photo: String,
   bio: String,
@@ -34,43 +35,43 @@ const UserSchema = new Schema({
   following: [{
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }
+      ref: 'User',
+    },
   }],
   hostedEvents: [{
     event: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event'
-    }
+      ref: 'Event',
+    },
   }],
   attendingEvents: [{
     event: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event'
-    }
-  }]
+      ref: 'Event',
+    },
+  }],
 });
 
 const EventSchema = new Schema({
   time: {
     type: Date,
-    required: true
+    required: true,
   },
   owner: {
     type: Number,
-    required: true
+    required: true,
   },
   location: {
     lat: Number,
-    lng: Number
+    lng: Number,
   },
   genre: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = {
-  User: mongoose.model("User", UserSchema),
-  Event: mongoose.model("Event", EventSchema)
+  User: mongoose.model('User', UserSchema),
+  Event: mongoose.model('Event', EventSchema),
 }

@@ -1,4 +1,4 @@
-const express = require('expreess');
+const express = require('express');
 
 const { user, map, schedule } = require('../controllers');
 

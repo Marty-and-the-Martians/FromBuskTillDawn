@@ -1,10 +1,11 @@
 const express = require('express');
+const path = require('path');
 
 const app = express();
 // const queries = require('../database/schema.js'); // Emma's guide
 const cors = require('cors');
 
-app.use(express.static(__dirname + '/../dist'));
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
 // middleware
 // use express.json for parsing JSON

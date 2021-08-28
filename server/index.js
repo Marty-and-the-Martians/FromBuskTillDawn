@@ -1,19 +1,21 @@
 const express = require('express');
 const path = require('path');
-
-const app = express();
-// const queries = require('../database/schema.js'); // Emma's guide
 const cors = require('cors');
 
+const router = require('./routes');
+// const queries = require('../database/schema.js'); // Emma's guide
+
+const app = express();
+// host the bundle
 app.use(express.static(path.resolve(__dirname, '../dist')));
 
 // middleware
-// use express.json for parsing JSON
 app.use(express.json());
-// parse form encoded data
 app.use(express.urlencoded({ extended: true }));
-// use cors middleware for enabling CORS with various options
 app.use(cors());
+
+// router
+app.use('/', router);
 
 // get entries  -- from Emma's guide -- mongodb connection required
 // app.get('/entries', (req, res) => {

@@ -74,4 +74,4 @@ const EventSchema = new Schema({
 module.exports = {
   User: mongoose.model('User', UserSchema),
   Event: mongoose.model('Event', EventSchema),
-}
+};

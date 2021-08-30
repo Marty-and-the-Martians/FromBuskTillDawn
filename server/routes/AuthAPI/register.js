@@ -1,6 +1,3 @@
-const express = require('express');
-
-const router = express.Router();
 const bcrypt = require('bcryptjs');
 // Load input validation
 const validateRegisterInput = require('../../../validation/register');
@@ -25,6 +22,7 @@ const registerUser = (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
+      zipcode: req.body.zipcode,
     });
     // Hash password before saving in database
     bcrypt.genSalt(10, (err, salt) => {
@@ -37,9 +35,7 @@ const registerUser = (req, res) => {
           .catch((err) => console.log(err));
       });
     });
-    return res.sendStatus(200);
   });
-  return res.sendStatus(201);
 };
 
 module.exports = {

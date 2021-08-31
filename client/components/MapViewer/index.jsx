@@ -1,7 +1,12 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import React, { useContext, useCallback, useRef } from 'react';
+import {
+  GoogleMap, useLoadScript, Marker, InfoWindow,
+} from '@react-google-maps/api';
+import Search from './Search';
+import Locate from './Locate';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
+import AppContext from '../../context';
 
 const center = {
   lat: 39.7392,
@@ -19,19 +24,22 @@ const options = {
 
 const libraries = ['places'];
 
-const MapViewer = (props) => {
+const MapViewer = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: keys.google.API_KEY,
     libraries,
   });
 
-  const [events, setEvents] = useState([]);
-  const [newEventLoc, setNewEventLoc] = useState({
-    lat: null,
-    lng: null,
-  });
-  const [selected, setSelected] = useState(null);
-  const [addEventPopupOpen, setAddEventPopupOpen] = useState(false); // change to windowOpen then only one window would open at once
+  const {
+    events,
+    setEvents,
+    newEventLoc,
+    setNewEventLoc,
+    selected,
+    setSelected,
+    addEventPopupOpen,
+    setAddEventPopupOpen,
+  } = useContext(AppContext);
 
   const handleSubmitEvent = useCallback((e) => {
     e.preventDefault();
@@ -66,17 +74,26 @@ const MapViewer = (props) => {
     mapRef.current = map;
   }, []);
 
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
-
   return (
     <div style={{ width: '50vw', height: '50vh' }}>
+
+      <Search panTo={panTo} />
+      <Locate panTo={panTo} />
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
         options={options}
         onClick={handleMapClick}
+        onLoad={onMapLoad}
       >
         {
           events.map((event) => (

@@ -61,7 +61,7 @@ const EventSchema = new Schema({
     type: Number,
     required: true,
   },
-  location: {
+  position: {
     lat: Number,
     lng: Number,
   },

@@ -1,5 +1,10 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from '@react-google-maps/api';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
 
@@ -33,24 +38,22 @@ const MapViewer = (props) => {
   const [selected, setSelected] = useState(null);
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false); // change to windowOpen then only one window would open at once
 
-  const handleSubmitEvent = useCallback((e) => {
-    e.preventDefault();
-    const newEvent = {
-      id: events.length,
-      position: newEventLoc,
-      time: new Date(),
-      type: 'Progressive Ska',
-      performerId: 42,
-      name: e.target.eventName.value,
-    };
-    setEvents((currEvents) => (
-      [
-        ...currEvents,
-        newEvent,
-      ]
-    ));
-    setAddEventPopupOpen(false);
-  }, [newEventLoc, events]);
+  const handleSubmitEvent = useCallback(
+    (e) => {
+      e.preventDefault();
+      const newEvent = {
+        id: events.length,
+        position: newEventLoc,
+        time: new Date(),
+        type: 'Progressive Ska',
+        performerId: 42,
+        name: e.target.eventName.value,
+      };
+      setEvents((currEvents) => [...currEvents, newEvent]);
+      setAddEventPopupOpen(false);
+    },
+    [newEventLoc, events]
+  );
 
   const handleMapClick = useCallback((e) => {
     setNewEventLoc({
@@ -78,36 +81,43 @@ const MapViewer = (props) => {
         options={options}
         onClick={handleMapClick}
       >
-        {
-          events.map((event) => (
-            <Marker
-              // icon={{
-              //   url: '../../assets/ASSET_NAME',
-              //   scaledSize: new window.google.maps.Size(30, 30),
-              //   origin: new window.google.maps.Point(0, 0),
-              //   anchor: new window.google.maps.Size(15, 15),
-              // }}
-              key={event.id}
-              position={event.position}
-              onClick={() => {
-                setSelected(event);
-                setAddEventPopupOpen(false);
-              }}
-            />
-          ))
-        }
+        {events.map((event) => (
+          <Marker
+            // icon={{
+            //   url: '../../assets/ASSET_NAME',
+            //   scaledSize: new window.google.maps.Size(30, 30),
+            //   origin: new window.google.maps.Point(0, 0),
+            //   anchor: new window.google.maps.Size(15, 15),
+            // }}
+            key={event.id}
+            position={event.position}
+            onClick={() => {
+              setSelected(event);
+              setAddEventPopupOpen(false);
+            }}
+          />
+        ))}
 
         {addEventPopupOpen ? (
           <InfoWindow
             position={newEventLoc}
-            onCloseClick={() => { setAddEventPopupOpen(false); }}
+            onCloseClick={() => {
+              setAddEventPopupOpen(false);
+            }}
           >
             <form onSubmit={handleSubmitEvent}>
-              <input type="text" placeholder="hello world" name="eventName" required />
+              <input
+                type="text"
+                placeholder="hello world"
+                name="eventName"
+                required
+              />
               <button type="submit">Add Event</button>
             </form>
           </InfoWindow>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
 
         {selected ? (
           <InfoWindow
@@ -118,7 +128,9 @@ const MapViewer = (props) => {
           >
             <h3>{selected.name}</h3>
           </InfoWindow>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
       </GoogleMap>
     </div>
   );

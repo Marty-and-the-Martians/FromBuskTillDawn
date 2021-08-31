@@ -1,0 +1,50 @@
+/* eslint-disable react/prop-types */
+import React from 'react';
+
+const CalRow = (props) => {
+  const { time, owner, genre, distance } = props.event;
+  const dateArr = time.toString().split(' ');
+  const eventDay = dateArr.slice(0, 2).join(' ');
+
+  const formatTime = (date) => {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours %= 12;
+    hours = hours || 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    const strTime = `${hours}:${minutes} ${ampm}`;
+    return strTime;
+  };
+  const prettyTime = formatTime(time);
+
+  const addToMyEvents = (e) => {
+    console.log(e);
+  };
+
+  console.log('owner: ', owner, 'date: ', dateArr);
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
+      <img
+        src={owner.photo}
+        alt="avatar of this busker"
+        style={{ maxHeight: '2rem', maxWidth: '2rem' }}
+      />
+      <div>{owner.name}</div>
+      <div>{genre}</div>
+      <div>{eventDay}</div>
+      <div>{prettyTime}</div>
+      <div>{`${distance} miles`}</div>
+      <button type="button" onClick={addToMyEvents}>
+        +
+      </button>
+    </div>
+  );
+};
+export default CalRow;

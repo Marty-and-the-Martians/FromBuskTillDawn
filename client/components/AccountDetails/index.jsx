@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
 import AppContext from '../../context';
+import MapViewer from '../MapViewer';
 
 const AccountDetails = () => {
   const context = useContext(AppContext);
 
   return (
-    <div> Account Settings Go Here </div>
+    <>
+      <MapViewer />
+      <div> Account Settings Go Here </div>
+    </>
   );
 };
 

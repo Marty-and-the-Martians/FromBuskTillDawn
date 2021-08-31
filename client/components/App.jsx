@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from 'react-router-dom';
 
 import AppContext from '../context';
@@ -17,7 +16,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
-  const [btnPath, setBtnPath] = useState('/');
+  const [btnPath, setBtnPath] = useState('/signin');
 
   return (
     <>
@@ -36,9 +35,6 @@ const App = () => {
           <h1>From Busk 'till Dawn starter!</h1>
         </div>
         <Router>
-          {/* <Link to="/">Home</Link>
-          <Link to="/signin">Sign in or Sign up</Link>
-          <Link to="/account">My Account</Link> */}
           <NavBar />
 
           <hr />
@@ -55,17 +51,9 @@ const App = () => {
             </Route>
           </Switch>
         </Router>
-        <MapViewer />
       </AppContext.Provider>
     </>
   );
 };
 
 export default App;
-
-
-{ /* isMarkerShown */ }
-{ /* googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`} */ }
-{ /* loadingElement={<div style={{ height: `100%` }} />} */ }
-{ /* containerElement={<div style={{ height: `400px` }} />} */ }
-{ /* mapElement={<div style={{ height: `100%` }} />} */ }

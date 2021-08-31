@@ -35,7 +35,7 @@ mongoose
   .catch((err) => console.log('MonGod said no. This is why: ', err));
 
 // set port where server will listen
-const port = 3000;
+const port = 3001;
 
 // tell server to listen on predefined port
 app.listen(port, () => {

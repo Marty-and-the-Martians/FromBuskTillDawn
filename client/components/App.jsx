@@ -8,15 +8,6 @@ import {
 
 import AppContext from '../context';
 import MapViewer from './MapViewer';
-<<<<<<< Updated upstream
-
-const App = () => (
-  <>
-    <h1>{`From Busk 'till Dawn starter!`}</h1>
-    <MapViewer />
-  </>
-);
-=======
 import Home from './Home';
 import Login from './Login';
 import NavBar from './NavBar';
@@ -69,7 +60,6 @@ const App = () => {
     </>
   );
 };
->>>>>>> Stashed changes
 
 export default App;
 

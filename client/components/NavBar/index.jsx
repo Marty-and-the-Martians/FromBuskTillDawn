@@ -10,9 +10,9 @@ const NavBar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (!loggedIn && !accountDeetsShowing) { setBtnText('Sign up or Sign in'); setBtnPath('/signin'); }
+    if (!loggedIn && !accountDeetsShowing) { setBtnText('Sign up or Sign in'); setBtnPath('/'); }
     if (loggedIn && !accountDeetsShowing) { setBtnText('My Account'); setBtnPath('/account'); }
-    if (loggedIn && accountDeetsShowing) { setBtnText('Home'); setBtnPath('/'); }
+    if (loggedIn && accountDeetsShowing) { setBtnText('Home'); setBtnPath('/home'); }
   }, [location.pathname, loggedIn]);
 
   const handleClick = () => {

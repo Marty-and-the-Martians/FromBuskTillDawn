@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 
 import AppContext from '../context';
-import MapViewer from './MapViewer';
 import Home from './Home';
 import Login from './Login';
 import NavBar from './NavBar';
@@ -40,10 +39,10 @@ const App = () => {
           <hr />
 
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/home">
               <Home />
             </Route>
-            <Route exact path="/signin">
+            <Route exact path="/">
               <Login />
             </Route>
             <Route exact path="/account">

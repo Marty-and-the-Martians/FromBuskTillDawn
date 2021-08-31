@@ -12,6 +12,7 @@ module.exports = {
     path: path.resolve('dist'),
     // naming bundled file
     filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -40,6 +41,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new CleanWebpackPlugin({

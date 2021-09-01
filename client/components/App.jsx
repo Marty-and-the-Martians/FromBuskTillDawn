@@ -15,7 +15,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
-  const [btnPath, setBtnPath] = useState('/signin');
+  const [btnPath, setBtnPath] = useState('/');
 
   return (
     <>

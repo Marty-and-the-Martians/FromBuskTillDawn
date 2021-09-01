@@ -10,9 +10,9 @@ const user = {
   cashappURL: 'URL_STRING',
   hostedEvents: [
     {
-      id: 1,
+      _id: 1,
       time: new Date(),
-      location: {
+      position: {
         lat: 39.742043,
         lng: -104.991531,
       },
@@ -25,14 +25,14 @@ const user = {
 
 const events = [
   {
-    id: 1,
+    _id: 1,
     time: new Date(),
     owner: {
       id: 52,
       name: 'Keanu',
       photo: 'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
     },
-    location: {
+    position: {
       lat: 39.742043,
       lng: -104.991531,
     },
@@ -41,7 +41,7 @@ const events = [
     description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
   },
   {
-    id: 2,
+    _id: 2,
     time: new Date(),
     owner: {
       id: 61,
@@ -49,7 +49,7 @@ const events = [
       photo: 'https://gravatar.com/avatar/6a7f448bc5aaff2d0f0a81167f70ff38?s=400&d=robohash&r=x',
     },
     distance: 4.81, // in miles
-    location: {
+    position: {
       lat: 39.752043,
       lng: -104.991531,
     },
@@ -57,7 +57,7 @@ const events = [
     description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
   },
   {
-    id: 3,
+    _id: 3,
     time: new Date(),
     owner: {
       id: 101,
@@ -65,7 +65,7 @@ const events = [
       photo: 'https://gravatar.com/avatar/9e31e32a0b1284d42c510218303c7182?s=400&d=robohash&r=x',
     },
     distance: 5.81, // in miles
-    location: {
+    position: {
       lat: 39.732043,
       lng: -104.991531,
     },

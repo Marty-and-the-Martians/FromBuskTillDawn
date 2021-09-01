@@ -18,7 +18,7 @@ const readMany = async (userId, lng, lat, range = 50, startDate = (new Date()).t
   const endDate = new Date(start.getTime() + 1 * 24 * 60 * 60 * 1000);
   let events;
   if (userId) {
-    events = await userDb.getUserSchedule(userId, lng, lat, range, startDate, endDate);
+    events = await userDb.readUserSchedule(userId, lng, lat, range, startDate, endDate);
   } else {
     events = await eventDb.readMany(lng, lat, range, startDate, endDate);
   }

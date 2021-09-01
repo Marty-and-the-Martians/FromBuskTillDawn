@@ -54,10 +54,10 @@ const App = () => {
           <hr />
 
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/home">
               <Home />
             </Route>
-            <Route exact path="/signin">
+            <Route exact path="/">
               <Login />
             </Route>
             <Route exact path="/account">

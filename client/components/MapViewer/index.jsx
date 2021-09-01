@@ -77,33 +77,35 @@ const MapViewer = () => {
         onClick={handleMapClick}
         onLoad={onMapLoad}
       >
-        {
-          events.map((event) => (
-            <Marker
-              // icon={{
-              //   url: '../../assets/ASSET_NAME',
-              //   scaledSize: new window.google.maps.Size(30, 30),
-              //   origin: new window.google.maps.Point(0, 0),
-              //   anchor: new window.google.maps.Size(15, 15),
-              // }}
-              key={event.id}
-              position={event.position}
-              onClick={() => {
-                setSelected(event);
-                setAddEventPopupOpen(false);
-              }}
-            />
-          ))
-        }
+        {events.map((event) => (
+          <Marker
+            // icon={{
+            //   url: '../../assets/ASSET_NAME',
+            //   scaledSize: new window.google.maps.Size(30, 30),
+            //   origin: new window.google.maps.Point(0, 0),
+            //   anchor: new window.google.maps.Size(15, 15),
+            // }}
+            key={event.id}
+            position={event.position}
+            onClick={() => {
+              setSelected(event);
+              setAddEventPopupOpen(false);
+            }}
+          />
+        ))}
 
         {addEventPopupOpen ? (
           <InfoWindow
             position={newEventLoc}
-            onCloseClick={() => { setAddEventPopupOpen(false); }}
+            onCloseClick={() => {
+              setAddEventPopupOpen(false);
+            }}
           >
             <NewEventForm />
           </InfoWindow>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
 
         {selected ? (
           <InfoWindow
@@ -118,7 +120,9 @@ const MapViewer = () => {
               <div>{selected.time}</div>
             </>
           </InfoWindow>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
       </GoogleMap>
     </div>
   );

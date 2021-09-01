@@ -8,7 +8,7 @@ const CalRow = (props) => {
   const dateArr = time.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
   const currentUser = 'Keanu';
-  const { loggedIn } = useContext(AppContext);
+  const { userNameClick } = useContext(AppContext);
 
   const formatTime = (date) => {
     let hours = date.getHours();
@@ -53,7 +53,7 @@ const CalRow = (props) => {
         alt="avatar of this busker"
         style={{ maxHeight: '2rem', maxWidth: '2rem' }}
       />
-      <div>{owner.name}</div>
+      <div onClick={userNameClick} style={{cursor: 'pointer'}}>{owner.name}</div>
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>

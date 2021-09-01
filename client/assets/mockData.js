@@ -24,6 +24,32 @@ const user = {
   ],
 };
 
+const user2 = {
+  _id: 52,
+  name: 'Keanu',
+  date: new Date(),
+  performer: true,
+  zipcode: 80211,
+  photo:
+    'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
+  bio: 'dkafshll;alhfjkalhdflkjdhasfjlhdf',
+  followers: 42,
+  cashappURL: 'URL_STRING',
+  hostedEvents: [
+    {
+      _id: 1,
+      time: new Date(),
+      position: {
+        lat: 39.742043,
+        lng: -104.991531,
+      },
+      distance: 3.81,
+      genre: 'Progressive Ska',
+      description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
+    },
+  ],
+};
+
 const events = [
   {
     _id: 1,
@@ -74,16 +100,33 @@ const events = [
       lng: -104.991508,
     },
     genre: 'Cool guitar noises',
-    description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
+    description: 'An actual musician! Performing for you!',
   },
   {
-    _id: 4,
+    _id: 1,
+    time: new Date(),
+    owner: {
+      _id: 63,
+      name: 'Keanu',
+      photo:
+        'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
+    },
+    position: {
+      lat: 39.742059,
+      lng: -104.991500,
+    },
+    distance: 12.1, // in miles
+    genre: 'Progressive Ska',
+    description: 'A second progressive ska show',
+  },
+  {
+    _id: 5,
     time: new Date(),
     owner: {
       _id: 69,
       name: 'JJ',
       photo:
-        'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
+        'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f95?s=400&d=robohash&r=x',
     },
     position: {
       lat: 39.742021,
@@ -91,7 +134,7 @@ const events = [
     },
     distance: 2.43, // in miles
     genre: 'Chainsaw Juggling',
-    description: 'asakdjfh;saldkfh',
+    description: 'He genuinely may hurt himself. Limited shows!!',
   },
 ];
 
@@ -102,6 +145,7 @@ const loggedOnUser = {
 
 export default {
   user,
+  user2,
   events,
   loggedOnUser,
 };

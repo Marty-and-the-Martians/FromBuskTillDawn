@@ -16,6 +16,9 @@ const App = () => {
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
   const [btnPath, setBtnPath] = useState('/');
+  const userNameClick = (e) => {
+    console.log(e);
+  };
 
   return (
     <>

@@ -6,7 +6,7 @@ import Data from '../../../assets/mockData';
 const CalViews = () => {
   const { loggedIn } = useContext(AppContext);
   const [currentCal, setCurrentCal] = useState('nearest');
-  const { user, events } = Data;
+  const { events } = Data;
 
   return (
     <>

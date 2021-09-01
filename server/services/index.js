@@ -1,5 +1,7 @@
 const user = require('./user.service');
+const event = require('./event.service');
 
-module.export = {
+module.exports = {
   user,
+  event,
 };

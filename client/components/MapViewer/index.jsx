@@ -4,6 +4,7 @@ import {
 } from '@react-google-maps/api';
 import Search from './Search';
 import Locate from './Locate';
+import NewEventForm from './NewEventForm';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
 import AppContext from '../../context';
@@ -40,25 +41,6 @@ const MapViewer = () => {
     addEventPopupOpen,
     setAddEventPopupOpen,
   } = useContext(AppContext);
-
-  const handleSubmitEvent = useCallback((e) => {
-    e.preventDefault();
-    const newEvent = {
-      id: events.length,
-      position: newEventLoc,
-      time: new Date(),
-      type: 'Progressive Ska',
-      performerId: 42,
-      name: e.target.eventName.value,
-    };
-    setEvents((currEvents) => (
-      [
-        ...currEvents,
-        newEvent,
-      ]
-    ));
-    setAddEventPopupOpen(false);
-  }, [newEventLoc, events]);
 
   const handleMapClick = useCallback((e) => {
     setNewEventLoc({
@@ -119,10 +101,7 @@ const MapViewer = () => {
             position={newEventLoc}
             onCloseClick={() => { setAddEventPopupOpen(false); }}
           >
-            <form onSubmit={handleSubmitEvent}>
-              <input type="text" placeholder="hello world" name="eventName" required />
-              <button type="submit">Add Event</button>
-            </form>
+            <NewEventForm />
           </InfoWindow>
         ) : <></>}
 
@@ -133,7 +112,11 @@ const MapViewer = () => {
               setSelected(null);
             }}
           >
-            <h3>{selected.name}</h3>
+            <>
+              <div>{selected.description}</div>
+              <div>{selected.genre}</div>
+              <div>{selected.time}</div>
+            </>
           </InfoWindow>
         ) : <></>}
       </GoogleMap>

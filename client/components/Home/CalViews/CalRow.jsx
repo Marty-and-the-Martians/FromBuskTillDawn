@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import AppContext from '../../../context';
 
 
 const CalRow = (props) => {
   const { time, owner, genre, distance } = props.event;
   const dateArr = time.toString().split(' ');
-  const eventDay = dateArr.slice(0, 2).join(' ');
+  const eventDay = dateArr.slice(0, 3).join(' ');
   const currentUser = 'Keanu';
   const { loggedIn } = useContext(AppContext);
 

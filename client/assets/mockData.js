@@ -80,7 +80,7 @@ const events = [
     _id: 4,
     time: new Date(),
     owner: {
-      _id: 52,
+      _id: 69,
       name: 'JJ',
       photo:
         'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
@@ -91,7 +91,7 @@ const events = [
     },
     distance: 2.43, // in miles
     genre: 'Chainsaw Juggling',
-    description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
+    description: 'asakdjfh;saldkfh',
   },
 ];
 

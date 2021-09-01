@@ -32,24 +32,30 @@ const UserSchema = new Schema({
   bio: String,
   followers: Number,
   cashappURL: String,
-  following: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+  following: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
     },
-  }],
-  hostedEvents: [{
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
+  ],
+  hostedEvents: [
+    {
+      event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event',
+      },
     },
-  }],
-  attendingEvents: [{
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
+  ],
+  attendingEvents: [
+    {
+      event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event',
+      },
     },
-  }],
+  ],
 });
 
 const EventSchema = new Schema({

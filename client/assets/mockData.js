@@ -1,7 +1,7 @@
 const user = {
   _id: 52,
   name: 'Keanu',
-  date: new Date(),
+  date: 'Wed Sep 01 2021 11:15:53 GMT-0600 (Mountain Daylight Time)',
   performer: true,
   zipcode: 80211,
   photo:
@@ -24,10 +24,36 @@ const user = {
   ],
 };
 
+const user2 = {
+  _id: 52,
+  name: 'JJ',
+  date: new Date(),
+  performer: true,
+  zipcode: 80211,
+  photo:
+  'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f95?s=400&d=robohash&r=x',
+  bio: 'dkafshll;alhfjkalhdflkjdhasfjlhdf',
+  followers: 42,
+  cashappURL: 'URL_STRING',
+  hostedEvents: [
+    {
+      _id: 2,
+      time: new Date(),
+      position: {
+        lat: 39.742043,
+        lng: -104.991531,
+      },
+      distance: 3.81,
+      genre: 'Juggling',
+      description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
+    },
+  ],
+};
+
 const mockEvents = [
   {
     _id: 1,
-    time: new Date(),
+    time: new Date('2021-09-15T13:26:26'),
     owner: {
       _id: 52,
       name: 'Keanu',
@@ -36,7 +62,7 @@ const mockEvents = [
     },
     position: {
       lat: 39.742043,
-      lng: -104.991531,
+      lng: -104.993531,
     },
     distance: 3.81, // in miles
     genre: 'Progressive Ska',
@@ -44,7 +70,7 @@ const mockEvents = [
   },
   {
     _id: 2,
-    time: new Date(),
+    time: new Date('2021-09-02T15:30:48'),
     owner: {
       _id: 61,
       name: 'Alisha',
@@ -54,14 +80,14 @@ const mockEvents = [
     distance: 4.81, // in miles
     position: {
       lat: 39.752551,
-      lng: -104.991249,
+      lng: -104.991269,
     },
     genre: 'Non-Progressive Ska',
     description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
   },
   {
     _id: 3,
-    time: new Date(),
+    time: new Date('2021-09-01T14:30:00'),
     owner: {
       _id: 101,
       name: 'AJT',
@@ -70,28 +96,45 @@ const mockEvents = [
     },
     distance: 5.81, // in miles
     position: {
-      lat: 39.732154,
+      lat: 39.732454,
       lng: -104.991508,
     },
     genre: 'Cool guitar noises',
-    description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
+    description: 'An actual musician! Performing for you!',
   },
   {
     _id: 4,
     time: new Date(),
     owner: {
-      _id: 69,
-      name: 'JJ',
+      _id: 63,
+      name: 'Keanu',
       photo:
         'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
     },
     position: {
-      lat: 39.742021,
-      lng: -104.991521,
+      lat: 39.742059,
+      lng: -104.991500,
+    },
+    distance: 12.1, // in miles
+    genre: 'Progressive Ska',
+    description: 'A second progressive ska show',
+  },
+  {
+    _id: 5,
+    time: new Date('2021-09-02T18:30:22'),
+    owner: {
+      _id: 69,
+      name: 'JJ',
+      photo:
+        'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f95?s=400&d=robohash&r=x',
+    },
+    position: {
+      lat: 39.742721,
+      lng: -104.991321,
     },
     distance: 2.43, // in miles
     genre: 'Chainsaw Juggling',
-    description: 'asakdjfh;saldkfh',
+    description: 'He genuinely may hurt himself. Limited shows!!',
   },
 ];
 
@@ -102,6 +145,7 @@ const loggedOnUser = {
 
 export default {
   user,
+  user2,
   mockEvents,
   loggedOnUser,
 };

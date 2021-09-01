@@ -17,6 +17,29 @@ const readMany = async (lng, lat, range, startDate, endDate) => {
           key: 'location',
         },
       },
+      {
+        $lookup: {
+          from: 'users',
+          localField: 'owner',
+          foreignField: '_id',
+          as: 'owner',
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          time: 1,
+          'owner._id': 1,
+          'owner.name': 1,
+          'owner.photo': 1,
+          // location: 0,
+          'position.lng': { $arrayElemAt: ['$location.coordinates', 0] },
+          'position.lat': { $arrayElemAt: ['$location.coordinates', 1] },
+          genre: 1,
+          description: 1,
+          distance: 1,
+        },
+      },
       ]);
     return events;
   } catch (err) {
@@ -36,7 +59,7 @@ const createOne = async (time, ownerId, lng, lat, genre, description) => {
       time,
       owner: user.id,
       location: {
-      // [parseFloat(lng), parseFloat(lat)],
+        // [parseFloat(lng), parseFloat(lat)],
         type: 'Point',
         coordinates: [parseFloat(lng), parseFloat(lat)],
       },

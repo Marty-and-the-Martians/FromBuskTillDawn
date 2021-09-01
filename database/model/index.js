@@ -9,26 +9,6 @@ const { Schema } = mongoose;
 //   .then(() => console.log('Mongo DB hath done a connect'))
 //   .catch((err) => console.log('MonGod said no. This is why: ', err));
 
-const LocationSchema = new Schema({
-  // location will change to position when I query if
-  // aliasing is easy. Location makes more sense anyway.
-  // This is a geoJson object so we can create an index
-  // {
-  //   type: "Point"
-  //   coordinates: [lng, lat]
-  // }
-
-  type: {
-    type: String,
-    default: 'Point',
-  },
-  coordinates: {
-    type: [Number], // [lng, lat]
-    required: true,
-    index: '2dsphere',
-  },
-});
-
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -55,28 +35,37 @@ const UserSchema = new Schema({
     type: Number,
     required: true,
   },
-  photo: String,
+  photo: {
+    type: String,
+    default: null,
+  },
   bio: String,
   followers: Number,
   cashappURL: String,
-  following: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+  following: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
     },
-  }],
-  hostedEvents: [{
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
+  ],
+  hostedEvents: [
+    {
+      event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event',
+      },
     },
-  }],
-  attendingEvents: [{
-    event: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event',
+  ],
+  attendingEvents: [
+    {
+      event: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Event',
+      },
     },
-  }],
+  ],
 });
 
 const EventSchema = new Schema({
@@ -89,10 +78,6 @@ const EventSchema = new Schema({
     ref: 'User',
   },
   location: {
-  //   type: [Number],
-  //   index: '2dsphere',
-  //   required: true,
-  // },
     type: {
       type: String,
       enum: ['Point'],
@@ -102,7 +87,6 @@ const EventSchema = new Schema({
       index: '2dsphere',
     },
   },
-  // location: LocationSchema,
   genre: {
     type: String,
     required: true,

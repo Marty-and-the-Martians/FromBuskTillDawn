@@ -19,13 +19,13 @@ const SignUpForm = ({ setShowSignUpForm }) => {
   };
 
   return (
-    <>
+    <div>
       {signUpErrors
         ? (
           <div>Invalid credentials: {loginErrors}</div>
         )
         : null}
-      <form onSubmit={handleSubmit(handleSignUp)}>
+      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(handleSignUp)}>
         <label>
           Desired Username:
           <input type="text" {...register('name')} />
@@ -48,7 +48,7 @@ const SignUpForm = ({ setShowSignUpForm }) => {
         </label>
         <input type="submit" value="Sign Up!" />
       </form>
-    </>
+    </div>
   );
 };
 

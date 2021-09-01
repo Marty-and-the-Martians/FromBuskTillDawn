@@ -65,9 +65,15 @@ const MapViewer = () => {
   if (!isLoaded) return 'Loading Maps';
   return (
     <div style={{ width: '50vw', height: '50vh' }}>
-
-      <Search panTo={panTo} />
-      <Locate panTo={panTo} />
+      <div style={{
+        position: 'absolute',
+        zIndex: '5',
+        marginLeft: '15em',
+      }}
+      >
+        <Search panTo={panTo} />
+        <Locate panTo={panTo} />
+      </div>
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -117,14 +123,14 @@ const MapViewer = () => {
             <>
               <div>{selected.description}</div>
               <div>{selected.genre}</div>
-              <div>{selected.time}</div>
+              <div>{selected.time.toString()}</div>
             </>
           </InfoWindow>
         ) : (
           <></>
         )}
       </GoogleMap>
-    </div>
+    </div >
   );
 };
 

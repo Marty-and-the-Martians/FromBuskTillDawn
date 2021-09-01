@@ -4,10 +4,10 @@ import CalRow from './CalRow';
 import Data from '../../../assets/mockData';
 
 const CalViews = () => {
-  const { loggedIn } = useContext(AppContext);
+  const { loggedIn, events } = useContext(AppContext);
   const [currentCal, setCurrentCal] = useState('nearest');
-  const { user, events } = Data;
-
+  const { user } = Data;
+  console.log(events);
   return (
     <>
       <input type="text" placeholder="Search" />

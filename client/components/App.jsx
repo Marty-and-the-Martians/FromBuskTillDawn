@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
 
+import data from '../assets/mockData';
 import AppContext from '../context';
 import Home from './Home';
 import Login from './Login';
@@ -15,7 +16,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
-  const [btnPath, setBtnPath] = useState('/signin');
+  const [btnPath, setBtnPath] = useState('/');
   const [events, setEvents] = useState([]);
   const [newEventLoc, setNewEventLoc] = useState({
     lat: null,
@@ -23,6 +24,10 @@ const App = () => {
   });
   const [selected, setSelected] = useState(null);
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
+
+  useEffect(() => {
+    setEvents(data.mockEvents);
+  }, []);
 
   return (
     <>

@@ -34,7 +34,7 @@ const LoginForm = ({ setShowSignUpForm }) => {
           <div> Invalid credentials: {loginErrors} </div>
         )
         : null}
-      <form onSubmit={handleSubmit(handleLogin)}>
+      <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(handleLogin)}>
         <label>
           Email:
           <input type="text" {...register('email')} />

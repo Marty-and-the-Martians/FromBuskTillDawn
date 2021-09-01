@@ -5,14 +5,13 @@ import Data from '../../../assets/mockData';
 
 const CalViews = () => {
   const { loggedIn } = useContext(AppContext);
-  const currentUser = 'Keanu';
   const [currentCal, setCurrentCal] = useState('nearest');
   const { user, events } = Data;
 
   return (
     <>
       <input type="text" placeholder="Search" />
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <div> Busker </div>
         <div> Genre </div>
         <div> Date </div>

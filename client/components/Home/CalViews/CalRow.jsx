@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, {useContext} from 'react';
+import AppContext from '../../../context';
+
 
 const CalRow = (props) => {
   const { time, owner, genre, distance } = props.event;
   const dateArr = time.toString().split(' ');
   const eventDay = dateArr.slice(0, 2).join(' ');
+  const currentUser = 'Keanu';
+  const { loggedIn } = useContext(AppContext);
 
   const formatTime = (date) => {
     let hours = date.getHours();
@@ -22,14 +26,27 @@ const CalRow = (props) => {
     console.log(e);
   };
 
+  const rowStyle = (() => {
+    if (currentUser === owner.name) {
+      return {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        border: 'solid 1px #e5c163',
+      };
+    }
+    return {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    };
+  })();
+
   console.log('owner: ', owner, 'date: ', dateArr);
 
   return (
     <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-      }}
+      style={rowStyle}
     >
       <img
         src={owner.photo}

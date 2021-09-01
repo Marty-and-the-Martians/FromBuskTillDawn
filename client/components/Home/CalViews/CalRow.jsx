@@ -21,6 +21,7 @@ const CalRow = (props) => {
     return strTime;
   };
   const prettyTime = formatTime(time);
+  console.log(time);
 
   const addToMyEvents = (e) => {
     console.log(e);
@@ -53,12 +54,12 @@ const CalRow = (props) => {
         alt="avatar of this busker"
         style={{ maxHeight: '2rem', maxWidth: '2rem' }}
       />
-      <div onClick={userNameClick} style={{cursor: 'pointer'}}>{owner.name}</div>
+      <div onClick={userNameClick} name={owner.name} style={{cursor: 'pointer'}}>{owner.name}</div>
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>
       <div>{`${distance} miles`}</div>
-      <button type="button" onClick={addToMyEvents}>
+      <button type="button" onClick={addToMyEvents} style={{cursor: 'pointer'}}>
         +
       </button>
     </div>

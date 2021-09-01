@@ -51,6 +51,7 @@ const App = () => {
         setSelected,
         addEventPopupOpen,
         setAddEventPopupOpen,
+        userNameClick,
       }}
       >
         <div>

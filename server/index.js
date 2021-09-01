@@ -30,6 +30,7 @@ require('../config/passport')(passport);
 const db = require('../config/keys').mongoURI;
 
 // router
+app.use('/api', router);
 
 // Mongo Connect
 mongoose
@@ -38,7 +39,7 @@ mongoose
   .catch((err) => console.log('MonGod said no. This is why: ', err));
 
 // set port where server will listen
-const port = 3001;
+const port = 3005;
 
 // tell server to listen on predefined port
 app.listen(port, () => {

@@ -42,7 +42,7 @@ const CalRow = (props) => {
     };
   })();
 
-  console.log('owner: ', owner, 'date: ', dateArr);
+  // console.log('owner: ', owner, 'date: ', dateArr);
 
   return (
     <div

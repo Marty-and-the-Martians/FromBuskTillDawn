@@ -65,15 +65,16 @@ const MapViewer = () => {
   if (!isLoaded) return 'Loading Maps';
   return (
     <div style={{ width: '50vw', height: '50vh' }}>
-      <div style={{
+      <span style={{
         position: 'absolute',
         zIndex: '5',
         marginLeft: '15em',
+        display: 'flex',
       }}
       >
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
-      </div>
+      </span>
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}

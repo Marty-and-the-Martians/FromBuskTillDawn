@@ -17,10 +17,19 @@ const NewEventForm = () => {
 
   const onSubmit = (data) => {
     const newEvent = {
-      ...data,
       id: events.length,
       position: newEventLoc,
+      time: new Date(data.time.toString()),
       performerId: 42,
+      description: data.description,
+      genre: data.genre,
+      owner: {
+        _id: Math.random(),
+        name: 'totes Real User',
+        photo:
+          'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
+      },
+      distance: (Math.random() * 10).toFixed(2),
     };
     setAddEventPopupOpen(false);
     setEvents((currEvents) => (

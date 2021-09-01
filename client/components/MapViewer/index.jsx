@@ -1,12 +1,13 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useContext, useCallback, useRef } from 'react';
 import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
+  GoogleMap, useLoadScript, Marker, InfoWindow,
 } from '@react-google-maps/api';
+import Search from './Search';
+import Locate from './Locate';
+import NewEventForm from './NewEventForm';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
+import AppContext from '../../context';
 
 const center = {
   lat: 39.7392,
@@ -24,36 +25,22 @@ const options = {
 
 const libraries = ['places'];
 
-const MapViewer = (props) => {
+const MapViewer = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: keys.google.API_KEY,
     libraries,
   });
 
-  const [events, setEvents] = useState([]);
-  const [newEventLoc, setNewEventLoc] = useState({
-    lat: null,
-    lng: null,
-  });
-  const [selected, setSelected] = useState(null);
-  const [addEventPopupOpen, setAddEventPopupOpen] = useState(false); // change to windowOpen then only one window would open at once
-
-  const handleSubmitEvent = useCallback(
-    (e) => {
-      e.preventDefault();
-      const newEvent = {
-        id: events.length,
-        position: newEventLoc,
-        time: new Date(),
-        type: 'Progressive Ska',
-        performerId: 42,
-        name: e.target.eventName.value,
-      };
-      setEvents((currEvents) => [...currEvents, newEvent]);
-      setAddEventPopupOpen(false);
-    },
-    [newEventLoc, events]
-  );
+  const {
+    events,
+    setEvents,
+    newEventLoc,
+    setNewEventLoc,
+    selected,
+    setSelected,
+    addEventPopupOpen,
+    setAddEventPopupOpen,
+  } = useContext(AppContext);
 
   const handleMapClick = useCallback((e) => {
     setNewEventLoc({
@@ -69,17 +56,26 @@ const MapViewer = (props) => {
     mapRef.current = map;
   }, []);
 
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
-
   return (
     <div style={{ width: '50vw', height: '50vh' }}>
+
+      <Search panTo={panTo} />
+      <Locate panTo={panTo} />
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
         options={options}
         onClick={handleMapClick}
+        onLoad={onMapLoad}
       >
         {events.map((event) => (
           <Marker
@@ -105,15 +101,7 @@ const MapViewer = (props) => {
               setAddEventPopupOpen(false);
             }}
           >
-            <form onSubmit={handleSubmitEvent}>
-              <input
-                type="text"
-                placeholder="hello world"
-                name="eventName"
-                required
-              />
-              <button type="submit">Add Event</button>
-            </form>
+            <NewEventForm />
           </InfoWindow>
         ) : (
           <></>
@@ -126,7 +114,11 @@ const MapViewer = (props) => {
               setSelected(null);
             }}
           >
-            <h3>{selected.name}</h3>
+            <>
+              <div>{selected.description}</div>
+              <div>{selected.genre}</div>
+              <div>{selected.time}</div>
+            </>
           </InfoWindow>
         ) : (
           <></>

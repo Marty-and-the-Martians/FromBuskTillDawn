@@ -15,7 +15,14 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
-  const [btnPath, setBtnPath] = useState('/');
+  const [btnPath, setBtnPath] = useState('/signin');
+  const [events, setEvents] = useState([]);
+  const [newEventLoc, setNewEventLoc] = useState({
+    lat: null,
+    lng: null,
+  });
+  const [selected, setSelected] = useState(null);
+  const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
 
   return (
     <>
@@ -28,6 +35,14 @@ const App = () => {
         setBtnPath,
         btnText,
         setBtnText,
+        events,
+        setEvents,
+        newEventLoc,
+        setNewEventLoc,
+        selected,
+        setSelected,
+        addEventPopupOpen,
+        setAddEventPopupOpen,
       }}
       >
         <div>

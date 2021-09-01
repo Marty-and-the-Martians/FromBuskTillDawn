@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 
 import AppContext from '../context';
-import MapViewer from './MapViewer';
 import Home from './Home';
 import Login from './Login';
 import NavBar from './NavBar';
@@ -16,7 +15,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
-  const [btnPath, setBtnPath] = useState('/signin');
+  const [btnPath, setBtnPath] = useState('/');
 
   return (
     <>
@@ -40,10 +39,10 @@ const App = () => {
           <hr />
 
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/home">
               <Home />
             </Route>
-            <Route exact path="/signin">
+            <Route exact path="/">
               <Login />
             </Route>
             <Route exact path="/account">

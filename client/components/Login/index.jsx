@@ -1,14 +1,17 @@
-import React, { useContext } from 'react';
-import AppContext from '../../context';
+import React, { useState } from 'react';
 import MapViewer from '../MapViewer';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 
 const Login = () => {
-  const { setLoggedIn } = useContext(AppContext);
+  const [showSignUpForm, setShowSignUpForm] = useState(false);
 
   return (
     <div>
       <MapViewer />
-      <button onClick={() => { setLoggedIn(true); }} type="submit">Sign In</button>
+      {showSignUpForm
+        ? <SignUpForm setShowSignUpForm={setShowSignUpForm} />
+        : <LoginForm setShowSignUpForm={setShowSignUpForm} /> }
     </div>
   );
 };

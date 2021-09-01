@@ -9,24 +9,27 @@ const router = require('./routes');
 
 const app = express();
 // host the bundle
-app.use(express.static(path.resolve(__dirname, '../dist')));
-
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
+
+app.use(express.static(path.resolve(__dirname, '../dist')));
+app.use('/api', router);
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: path.resolve(__dirname, '../dist') });
+});
 // if data is coming in as an empty object, consider exetneded: true
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
 require('../config/passport')(passport);
 
-app.use(cors());
-
 // DB Config
 const db = require('../config/keys').mongoURI;
 
 // router
-app.use('/', router);
 
 // Mongo Connect
 mongoose

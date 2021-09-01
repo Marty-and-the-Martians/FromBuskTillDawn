@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
+// const db = require('../../config/keys').mongoURI;
 
 const { Schema } = mongoose;
+
+// Mongo Connect
+// mongoose
+//   .connect(db, { useNewUrlParser: true })
+//   .then(() => console.log('Mongo DB hath done a connect'))
+//   .catch((err) => console.log('MonGod said no. This is why: ', err));
 
 const UserSchema = new Schema({
   name: {
@@ -28,7 +35,10 @@ const UserSchema = new Schema({
     type: Number,
     required: true,
   },
-  photo: String,
+  photo: {
+    type: String,
+    default: null,
+  },
   bio: String,
   followers: Number,
   cashappURL: String,
@@ -64,16 +74,26 @@ const EventSchema = new Schema({
     required: true,
   },
   owner: {
-    type: Number,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
-  position: {
-    lat: Number,
-    lng: Number,
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+    },
+    coordinates: {
+      type: [Number],
+      index: '2dsphere',
+    },
   },
   genre: {
     type: String,
     required: true,
+  },
+  description: {
+    type: String,
+    required: false,
   },
 });
 

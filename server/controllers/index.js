@@ -1,5 +1,7 @@
-const user = require('./user.services');
+const user = require('./user.controller');
+const event = require('./event.controller');
 
 module.exports = {
   user,
+  event,
 };

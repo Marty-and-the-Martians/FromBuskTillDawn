@@ -7,7 +7,7 @@ const Login = () => {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
 
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       <MapViewer />
       {showSignUpForm
         ? <SignUpForm setShowSignUpForm={setShowSignUpForm} />

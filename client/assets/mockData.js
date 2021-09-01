@@ -50,7 +50,7 @@ const user2 = {
   ],
 };
 
-const events = [
+const mockEvents = [
   {
     _id: 1,
     time: new Date(),
@@ -146,6 +146,6 @@ const loggedOnUser = {
 export default {
   user,
   user2,
-  events,
+  mockEvents,
   loggedOnUser,
 };

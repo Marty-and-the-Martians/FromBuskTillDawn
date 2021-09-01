@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
 
+import data from '../assets/mockData';
 import AppContext from '../context';
 import Home from './Home';
 import Login from './Login';
@@ -19,6 +20,17 @@ const App = () => {
   const userNameClick = (e) => {
     console.log(e);
   };
+  const [events, setEvents] = useState([]);
+  const [newEventLoc, setNewEventLoc] = useState({
+    lat: null,
+    lng: null,
+  });
+  const [selected, setSelected] = useState(null);
+  const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
+
+  useEffect(() => {
+    setEvents(data.mockEvents);
+  }, []);
 
   return (
     <>
@@ -31,6 +43,14 @@ const App = () => {
         setBtnPath,
         btnText,
         setBtnText,
+        events,
+        setEvents,
+        newEventLoc,
+        setNewEventLoc,
+        selected,
+        setSelected,
+        addEventPopupOpen,
+        setAddEventPopupOpen,
       }}
       >
         <div>

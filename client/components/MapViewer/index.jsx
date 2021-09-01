@@ -117,7 +117,7 @@ const MapViewer = () => {
             <>
               <div>{selected.description}</div>
               <div>{selected.genre}</div>
-              <div>{selected.time}</div>
+              <div>{selected.time.toString()}</div>
             </>
           </InfoWindow>
         ) : (

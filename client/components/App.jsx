@@ -25,7 +25,6 @@ const App = () => {
   const [selected, setSelected] = useState(null);
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
 
-  console.log(data.mockEvents);
   useEffect(() => {
     setEvents(data.mockEvents);
   }, []);

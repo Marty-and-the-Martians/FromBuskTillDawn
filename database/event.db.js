@@ -54,8 +54,8 @@ const createOne = async (time, ownerId, lng, lat, genre, description) => {
   const session = await mongoose.startSession();
   session.startTransaction();
   try {
-    const user = await User
-      .findById(mongoose.Types.ObjectId(ownerId.toString()))
+    const user = await User // i dont think I need this lookup I can just use the owner Id on the event. the only though I have is this checks to make sure the user id is in the db first, but the transaction would fail if the second user lookup fails in the findByIdAndUpdate
+      .findById(mongoose.Types.ObjectId(ownerId.toString())) // probably dont need toString here
       .session(session);
 
     const event = new Event({
@@ -101,9 +101,28 @@ const updateOne = async (eventId, updatedInfo) => {
 
 // ////////////////////////      DELETE      ////////////////////////////////////
 const deleteOne = async (eventId) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
   try {
+    await Event
+      .findByIdAndDelete(mongoose.Types.ObjectId(eventId))
+      .session(session);
+
+    await User
+      .updateMany({
+        $expr: { $in: [eventId, 'hostedEvents'] },
+      },
+      {
+        $pullAll: { hostedEvents: [eventId] },
+      })
+      .session(session);
+
+    return await session.commitTransaction();
   } catch (err) {
+    await session.abortTransaction();
     throw new Error('Error querying DB', { cause: err });
+  } finally {
+    session.endSession();
   }
 };
 

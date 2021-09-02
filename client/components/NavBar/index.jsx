@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
@@ -13,24 +13,33 @@ import AppContext from '../../context';
 import useStyles from '../hooks/useStyles';
 
 const NavBar = () => {
+  const [loggedOut, setLoggedOut] = useState(false);
   const {
-    btnPath, setBtnPath, btnText, setBtnText, loggedIn, accountDeetsShowing, setAccountDeetsShowing,
+    setLoggedIn, btnPath, setBtnPath, btnText, setBtnText, loggedIn,
+    accountDeetsShowing, setAccountDeetsShowing, setCurrentUser,
   } = useContext(AppContext);
   const classes = useStyles();
 
   const location = useLocation();
-
-  useEffect(() => {
-    if (!loggedIn && !accountDeetsShowing) { setBtnText('Login'); setBtnPath('/login'); }
-    if (loggedIn && !accountDeetsShowing) { setBtnText('My Account'); setBtnPath('/account'); }
-    if (loggedIn && accountDeetsShowing) { setBtnText('Home'); setBtnPath('/'); }
-  }, [location.pathname, loggedIn]);
 
   const handleClick = () => {
     if (loggedIn) {
       setAccountDeetsShowing(!accountDeetsShowing);
     }
   };
+
+  const handleLogout = () => {
+    Cookies.remove('token');
+    setLoggedIn(false);
+    setLoggedOut(true);
+    setCurrentUser({});
+  };
+
+  useEffect(() => {
+    if (!loggedIn && !accountDeetsShowing) { setBtnText('Login'); setBtnPath('/login'); }
+    if (loggedIn && !accountDeetsShowing) { setBtnText('My Account'); setBtnPath('/account'); }
+    if (loggedIn && accountDeetsShowing) { setBtnText('Home'); setBtnPath('/'); }
+  }, [location.pathname, loggedIn]);
 
   return (
     <AppBar position="static">

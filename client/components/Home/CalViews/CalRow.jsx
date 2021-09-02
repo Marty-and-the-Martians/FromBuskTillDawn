@@ -14,7 +14,6 @@ const CalRow = ({ event }) => {
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
   const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
-  console.log('User: ', currentUser, 'Event:, ', event);
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -67,7 +66,7 @@ const CalRow = ({ event }) => {
       value={event._id}
     >
       <img
-        src={owner.photo}
+        src={owner[0].photo}
         alt="avatar of this busker"
         style={{ maxHeight: '2rem', maxWidth: '2rem' }}
       />

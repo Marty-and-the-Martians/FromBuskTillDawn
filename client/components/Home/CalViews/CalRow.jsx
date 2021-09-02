@@ -22,7 +22,10 @@ const CalRow = (props) => {
     return strTime;
   };
   const prettyTime = formatTime(time);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
   const addToMyEvents = (e) => {
     console.log(e);
   };
@@ -42,8 +45,6 @@ const CalRow = (props) => {
       justifyContent: 'space-between',
     };
   })();
-
-  console.log('owner: ', owner, 'date: ', dateArr);
 
   return (
     <div

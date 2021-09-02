@@ -1,3 +1,5 @@
+const endOfDay = require('date-fns/endOfDay');
+const startOfDay = require('date-fns/startOfDay');
 const { eventDb, userDb } = require('../../database');
 
 const readMany = async (userId, lng, lat, range = 50, startDate = (new Date()).toString()) => {
@@ -7,20 +9,22 @@ const readMany = async (userId, lng, lat, range = 50, startDate = (new Date()).t
 
   // verify valid session here
 
-  const start = new Date(startDate);
+  const start = startOfDay(new Date(startDate));
+  const endDate = endOfDay(new Date(startDate));
+
   // let start;
   // if (typeof startDate === 'string') {
   //   start = new Date(startDate);
   // } else { // otherwise its a date from
   //   start = startDate;
   // }
-  // startDate = new Date(startDate.getTime() - 0.5 * 24 * 60 * 60 * 1000);
-  const endDate = new Date(start.getTime() + 1 * 24 * 60 * 60 * 1000);
+  // start = new Date(start.getTime() - 0.5 * 24 * 60 * 60 * 1000);
+  // const endDate = new Date(start.getTime() + 1 * 24 * 60 * 60 * 1000);
   let events;
   if (userId) {
-    events = await userDb.readUserSchedule(userId, lng, lat, range, startDate, endDate);
+    events = await userDb.readUserSchedule(userId, lng, lat, range, start, endDate);
   } else {
-    events = await eventDb.readMany(lng, lat, range, startDate, endDate);
+    events = await eventDb.readMany(lng, lat, range, start, endDate);
   }
   return events;
 };

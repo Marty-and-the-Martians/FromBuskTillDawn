@@ -135,8 +135,8 @@ const MapViewer = () => {
             }}
           >
             <>
-              <div>{selected.description}</div>
-              <div>{selected.genre}</div>
+              <div>Genre: {selected.genre}</div>
+              <div>Description: {selected.description}</div>
               <div>
                 {new Date(selected.time).toString().split(' ').slice(0, 3).join(' ')}
                 {' at '}

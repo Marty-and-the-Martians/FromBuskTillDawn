@@ -181,9 +181,9 @@ const deleteOneAttendingEvent = async (userId, eventId) => {
       .updateOne({
         _id: mongoose.Types.ObjectId(userId),
       },
-        {
-          $pullAll: { attendingEvents: [eventId] },
-        });
+      {
+        $pullAll: { attendingEvents: [eventId] },
+      });
   } catch (err) {
     throw new Error('Error Querying DB', { cause: err });
   }

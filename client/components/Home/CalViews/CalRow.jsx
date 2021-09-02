@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
+import axios from 'axios';
 import AppContext from '../../../context';
 
-const CalRow = (props) => {
-  const { time, owner, genre, distance } = props.event;
+const CalRow = ({ event }) => {
+  const {
+    time, owner, genre, distance,
+  } = event;
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const currentUser = 'Keanu';
-  const { userNameClick } = useContext(AppContext);
-
+  const { userNameClick, currentUser, myCalendar } = useContext(AppContext);
 
   const formatTime = (date) => {
     let hours = date.getHours();
@@ -21,15 +22,19 @@ const CalRow = (props) => {
     const strTime = `${hours}:${minutes} ${ampm}`;
     return strTime;
   };
-  const prettyTime = formatTime(timeObj);
-  // console.log(timeObj);
 
-  const addToMyEvents = (e) => {
-    console.log(e);
+  const prettyTime = formatTime(timeObj);
+
+  const addToMyEvents = (event) => {
+    const eventId = event.target.attributes[1].value;
+    const userId = currentUser.id;
+    axios
+      .put(`/api/user/${userId}/${eventId}`)
+      .then(myCalendar());
   };
 
   const rowStyle = (() => {
-    if (currentUser === owner[0].name) {
+    if (currentUser.name === owner[0].name) {
       return {
         display: 'flex',
         flexDirection: 'row',
@@ -44,11 +49,10 @@ const CalRow = (props) => {
     };
   })();
 
-  // console.log(owner)
-
   return (
     <div
       style={rowStyle}
+      value={event._id}
     >
       <img
         src={owner.photo}
@@ -60,9 +64,9 @@ const CalRow = (props) => {
       <div>{eventDay}</div>
       <div>{prettyTime}</div>
       <div>{`${distance.toFixed(2)} miles`}</div>
-      <button type="button" onClick={addToMyEvents} style={{ cursor: 'pointer' }}>
-        +
-      </button>
+      {currentUser.name === owner[0].name
+        ? <div />
+        : <button type="button" value={event._id} onClick={addToMyEvents} style={{ cursor: 'pointer' }}> + </button>}
     </div>
   );
 };

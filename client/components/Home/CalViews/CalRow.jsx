@@ -7,11 +7,12 @@ const CalRow = ({ event }) => {
   const {
     time, owner, genre, distance,
   } = event;
+  const performerId = owner[0]._id;
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const { userNameClick, currentUser, myCalendar } = useContext(AppContext);
-
+  const { currentUser, myCalendar } = useContext(AppContext);
+  console.log('User: ', currentUser, 'Event:, ', event);
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -31,6 +32,11 @@ const CalRow = ({ event }) => {
     axios
       .put(`/api/user/${userId}/${eventId}`)
       .then(myCalendar());
+  };
+
+  const userNameClick = (e) => {
+    const id = e.target.getAttribute('id');
+    console.log(id);
   };
 
   const rowStyle = (() => {
@@ -59,7 +65,7 @@ const CalRow = ({ event }) => {
         alt="avatar of this busker"
         style={{ maxHeight: '2rem', maxWidth: '2rem' }}
       />
-      <div onClick={userNameClick} name={owner[0].name} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
+      <div onClick={userNameClick} id={performerId} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>

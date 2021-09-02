@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import AppContext from '../../../context';
+
 
 const CalRow = ({ event }) => {
   const {
@@ -11,7 +13,7 @@ const CalRow = ({ event }) => {
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const { currentUser, myCalendar } = useContext(AppContext);
+  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
   console.log('User: ', currentUser, 'Event:, ', event);
   const formatTime = (date) => {
     let hours = date.getHours();
@@ -36,7 +38,7 @@ const CalRow = ({ event }) => {
 
   const userNameClick = (e) => {
     const id = e.target.getAttribute('id');
-    console.log(id);
+    setcurrentPerformerProfile(id);
   };
 
   const rowStyle = (() => {
@@ -54,6 +56,10 @@ const CalRow = ({ event }) => {
       justifyContent: 'space-between',
     };
   })();
+
+  if (currentPerformerProfile.length) {
+    return <Redirect to="/performer" />;
+  }
 
   return (
     <div

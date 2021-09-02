@@ -12,7 +12,7 @@ const PerformerProfile = () => {
   // ));
 
   return (
-    <div>PERFORMER INFO GOES HERE</div>
+    <div>PERFORMER PROFILE GOES HERE</div>
     // <div>
     //   <h3>Account Settings</h3>
     //   <button type="button">edit profile</button>
@@ -21,15 +21,13 @@ const PerformerProfile = () => {
     //   <div>{`payment: ${cashappURL}`}</div>
     //   <div>{`Email: ${email}`}</div>
     //   <div>{`Bio: ${bio}`}</div>
-    //   {performer
-    //     ? (
-    //       <>
+
+
     //         <div>{`Follower Count: ${followers}`}</div>
     //         <div>{`Home Zipcode: ${zipcode}`}</div>
     //         {events}
-    //       </>
-    //     )
-    //     : <div>{`Home Zipcode: ${zipcode}`}</div>}
+
+
     // </div>
   );
 };

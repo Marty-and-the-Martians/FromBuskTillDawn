@@ -15,7 +15,7 @@ import cleanMyCal from '../helperFuncs/cleanMyCal';
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
-  const [btnText, setBtnText] = useState('Sign in or Sign up');
+  const [btnText, setBtnText] = useState('Login');
   const [btnPath, setBtnPath] = useState('/');
   const [center, setCenter] = useState({
     lat: 39.7392,
@@ -51,58 +51,50 @@ const App = () => {
   useEffect(eventFetch, [center, eventFetchDate]);
 
   return (
-    <>
-      <AppContext.Provider value={{
-        eventFetch,
-        myCalendar,
-        setLoggedIn,
-        setAccountDeetsShowing,
-        setBtnPath,
-        setBtnText,
-        setEvents,
-        setNewEventLoc,
-        setSelected,
-        setAddEventPopupOpen,
-        userNameClick,
-        setCurrentUser,
-        setCenter,
-        setEventFetchDate,
-        eventFetchDate,
-        currentUser,
-        loggedIn,
-        accountDeetsShowing,
-        btnPath,
-        btnText,
-        events,
-        newEventLoc,
-        selected,
-        center,
-        addEventPopupOpen,
-        currentUser,
-      }}
-      >
-        <div>
-          <h1>From Busk 'till Dawn starter!</h1>
-        </div>
-        <Router>
-          <NavBar />
+    <AppContext.Provider value={{
+      eventFetch,
+      myCalendar,
+      setLoggedIn,
+      setAccountDeetsShowing,
+      setBtnPath,
+      setBtnText,
+      setEvents,
+      setNewEventLoc,
+      setSelected,
+      setAddEventPopupOpen,
+      userNameClick,
+      setCurrentUser,
+      setCenter,
+      currentUser,
+      loggedIn,
+      accountDeetsShowing,
+      btnPath,
+      btnText,
+      events,
+      newEventLoc,
+      selected,
+      center,
+      addEventPopupOpen,
+    }}
+    >
+      <Router>
+        <NavBar />
 
-          <hr />
+        <hr />
 
-          <Switch>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route exact path="/account">
-              <AccountDetails />
-            </Route>
-          </Switch>
-        </Router>
-      </AppContext.Provider>
-    </>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/account">
+            <AccountDetails />
+          </Route>
+        </Switch>
+      </Router>
+    </AppContext.Provider>
   );
 };
 

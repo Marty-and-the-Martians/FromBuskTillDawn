@@ -7,11 +7,11 @@ import PerformerProfile from './PerformerProfile';
 
 const AccountDetails = () => {
   const { loggedIn } = useContext(AppContext);
-  const { user, loggedOnUser } = data;
-  const profileInfo = loggedIn ? loggedOnUser : user;
+  const { user2, loggedOnUser } = data;
+  const profileInfo = loggedIn ? loggedOnUser : user2;
   const { name } = profileInfo;
   const currentUser = 'Keanu';
-  console.log(user);
+  // console.log(user);
   return (
     <>
       <MapViewer />

@@ -17,6 +17,9 @@ const App = () => {
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
   const [btnPath, setBtnPath] = useState('/');
+  const userNameClick = (e) => {
+    console.log(e);
+  };
   const [events, setEvents] = useState([]);
   const [newEventLoc, setNewEventLoc] = useState({
     lat: null,
@@ -48,6 +51,7 @@ const App = () => {
         setSelected,
         addEventPopupOpen,
         setAddEventPopupOpen,
+        userNameClick,
       }}
       >
         <div>

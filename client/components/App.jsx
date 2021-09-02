@@ -31,24 +31,18 @@ const App = () => {
   const [selected, setSelected] = useState(null);
   const [eventFetchDate, setEventFetchDate] = useState(new Date().toString());
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
-<<<<<<< HEAD
   const [currentPerformerProfile, setcurrentPerformerProfile] = useState('');
-=======
->>>>>>> main
 
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
       .then((results) => { setEvents(results.data); });
   };
 
-<<<<<<< HEAD
-=======
   const fetchSessionInfo = () => {
     const tokens = (Cookies.get('token')).split('.');
     setCurrentUser(JSON.parse(atob(tokens[1])));
   };
 
->>>>>>> main
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)

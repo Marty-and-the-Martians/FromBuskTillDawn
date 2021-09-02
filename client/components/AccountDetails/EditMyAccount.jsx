@@ -53,7 +53,7 @@ const EditMyAccount = (props) => {
           )
           : null
       }
-      <input type="submit" />
+      <input type="submit" value="Done" />
     </form>
   );
 };

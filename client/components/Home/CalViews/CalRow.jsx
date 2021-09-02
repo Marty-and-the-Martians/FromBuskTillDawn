@@ -44,8 +44,6 @@ const CalRow = (props) => {
     };
   })();
 
-  // console.log('owner: ', owner, 'date: ', dateArr);
-
   return (
     <div
       style={rowStyle}

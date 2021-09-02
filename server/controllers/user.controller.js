@@ -3,9 +3,15 @@ const { user } = require('../services');
 const getUser = (req, res, next) => {
   // do we distinguish between a logged in user and any other user to view info on the request?
   // take info off req
-  user.getOne()
-    .then() // send 200
-    .catch(); // send 400 or 500
+  const { params: { userId } } = req;
+  user.readOne(userId)
+    .then((requestedUser) => {
+      res.send(requestedUser);
+    })
+    .catch((err) => {
+      // handle errors to reflect 400/500
+      res.sendStatus(400);
+    });
 };
 
 const loginUser = (req, res, next) => { };
@@ -37,7 +43,7 @@ const updateUser = (req, res, next) => {
     .then(() => {
       res.sendStatus(200);
     })
-    .catch(() => {
+    .catch((err) => {
       //handle errors to reflect 400/500
       res.sendStatus(400);
     });
@@ -49,7 +55,7 @@ const deleteEvent = (req, res, next) => {
     .then(() => {
       res.sendStatus(200);
     })
-    .catch(() => {
+    .catch((err) => {
       //handle errors to reflect 400/500
       res.sendStatus(400);
     });

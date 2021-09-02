@@ -20,6 +20,7 @@ const App = () => {
     lat: 39.7392,
     lng: -104.9903,
   });
+  const [currentUser, setCurrentUser] = useState({});
   const userNameClick = (e) => {
     console.log(e);
   };
@@ -46,23 +47,25 @@ const App = () => {
       <AppContext.Provider value={{
         setLoggedIn,
         setAccountDeetsShowing,
+        setBtnPath,
+        setBtnText,
+        setEvents,
+        setNewEventLoc,
+        setSelected,
+        setAddEventPopupOpen,
+        userNameClick,
+        setCurrentUser,
         loggedIn,
         accountDeetsShowing,
         btnPath,
-        setBtnPath,
         btnText,
-        setBtnText,
         events,
-        setEvents,
         newEventLoc,
-        setNewEventLoc,
         selected,
         setSelected,
         center,
         setCenter,
         addEventPopupOpen,
-        setAddEventPopupOpen,
-        userNameClick,
       }}
       >
         <div>

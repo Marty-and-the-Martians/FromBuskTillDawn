@@ -16,7 +16,7 @@ const getEvents = (req, res, next) => {
 
   // might not need userID
   // const { params, query, body } = req;
-  const { params: { userId }, query: { lng, lat, range }, body: { date } } = req;
+  const { params: { userId }, query: { lng, lat, range, date } } = req;
   event.readMany(userId, lng, lat, range, date)
     .then((events) => {
       res.send(events);

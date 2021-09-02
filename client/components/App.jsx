@@ -28,22 +28,18 @@ const App = () => {
     lng: null,
   });
   const [selected, setSelected] = useState(null);
+  const [eventFetchDate, setEventFetchDate] = useState(new Date().toString());
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
   const eventFetch = () => {
-    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
+    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
       .then((results) => { setEvents(results.data); });
   };
+
 
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
-<<<<<<< HEAD
-      .then((results) => console.log('mySchedule: ', results.data,
-        // cleanMyCal(results.data)
-      ));
-=======
       .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
->>>>>>> 2df1543a91e65a3cd47edf3c21a53e8b2c39b010
   };
 
   const userNameClick = (e) => {
@@ -52,7 +48,7 @@ const App = () => {
 
   useEffect(eventFetch, []);
 
-  useEffect(eventFetch, [center]);
+  useEffect(eventFetch, [center, eventFetchDate]);
 
   return (
     <AppContext.Provider value={{

@@ -5,11 +5,12 @@ import MapViewer from '../MapViewer';
 import CalViews from './CalViews';
 
 const Home = () => {
-  const { eventFetch, myCalendar, currentUser } = useContext(AppContext);
+  const { eventFetch, myCalendar, currentUser, eventFetchDate, setEventFetchDate } = useContext(AppContext);
   return (
     <div>
       <MapViewer />
-      <button onClick={eventFetch}> Local Events </button>
+      <input type="date" value={new Date(eventFetchDate).toISOString().slice(0, 10)} onChange={(event) => { setEventFetchDate(new Date(new Date(event.target.value).getTime() + (6 * 60 * 60 * 1001)).toString()); }} />
+      <button> Local Events </button>
       {currentUser.id
         ? <button onClick={myCalendar}> My Schedule </button>
         : null}

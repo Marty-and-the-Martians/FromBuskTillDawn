@@ -7,7 +7,7 @@ const readOne = async (userId) => {
 
   // verify valid session here
 
-  return userDb.readOne(userId, wantOwnInfo);
+  return userDb.readOne(userId);
 
   // add anything to the response here
   // return response here

@@ -34,7 +34,6 @@ const readOne = async (userId) => {
 const readUserSchedule = async (userId, lng, lat) => {
   try {
     const events = await User
-      // .find({_id: userId})
       .aggregate([
         {
           $match: { _id: mongoose.Types.ObjectId(userId) },
@@ -45,12 +44,9 @@ const readUserSchedule = async (userId, lng, lat) => {
             let: {
               userId: '$_id', eventIds: '$hostedEvents',
             },
-            // localField: 'hostedEvents',
-            // foreignField: '_id',
             pipeline: [
               {
                 $geoNear: {
-                  // maxDistance: range * 1609.34, // 1609.34 meters in a mile,
                   distanceMultiplier: 1 / 1609.34,
                   near: {
                     type: 'Point',
@@ -77,7 +73,6 @@ const readUserSchedule = async (userId, lng, lat) => {
                   'owner._id': 1,
                   'owner.name': 1,
                   'owner.photo': 1,
-                  // location: 0,
                   'position.lng': { $arrayElemAt: ['$location.coordinates', 0] },
                   'position.lat': { $arrayElemAt: ['$location.coordinates', 1] },
                   genre: 1,
@@ -95,12 +90,9 @@ const readUserSchedule = async (userId, lng, lat) => {
             let: {
               userId: '$_id',
             },
-            // localField: 'hostedEvents',
-            // foreignField: '_id',
             pipeline: [
               {
                 $geoNear: {
-                  // maxDistance: range * 1609.34, // 1609.34 meters in a mile,
                   distanceMultiplier: 1 / 1609.34,
                   near: {
                     type: 'Point',
@@ -108,8 +100,6 @@ const readUserSchedule = async (userId, lng, lat) => {
                   },
                   spherical: true,
                   query: { $expr: { $ne: ['$owner', '$$userId'] } },
-                  // owner: '$$userId' },
-                  // { _id: '$$hostedEvent' },
                   distanceField: 'distance',
                   key: 'location',
                 },
@@ -129,7 +119,6 @@ const readUserSchedule = async (userId, lng, lat) => {
                   'owner._id': 1,
                   'owner.name': 1,
                   'owner.photo': 1,
-                  // location: 0,
                   'position.lng': { $arrayElemAt: ['$location.coordinates', 0] },
                   'position.lat': { $arrayElemAt: ['$location.coordinates', 1] },
                   genre: 1,

@@ -32,6 +32,13 @@ const loginUser = (req, res) => {
         const payload = {
           id: user.id,
           name: user.name,
+          email: user.email,
+          performer: user.performer,
+          zipcode: user.zipcode,
+          photo: user.photo,
+          bio: user.bio,
+          followers: user.followers,
+          cashappURL: user.cashappURL,
         };
         // Sign token
         jwt.sign(
@@ -41,6 +48,7 @@ const loginUser = (req, res) => {
             expiresIn: 31556926, // 1 year in seconds
           },
           (err, token) => {
+            res.cookie('token', token, { httpOnly: true });
             res.json({
               success: true,
               token: `Bearer ${token}`,

@@ -1,13 +1,15 @@
+import axios from 'axios';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import AppContext from '../../context';
 
 const NewEventForm = () => {
   const {
-    events,
+    center,
     setEvents,
     newEventLoc,
     setAddEventPopupOpen,
+    currentUser,
   } = useContext(AppContext);
 
   const {
@@ -16,28 +18,35 @@ const NewEventForm = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const newEvent = {
-      id: events.length,
-      position: newEventLoc,
-      time: new Date(data.time.toString()),
-      performerId: 42,
+    // const newEvent = {
+    //   id: events.length,
+    //   position: newEventLoc,
+    //   time: new Date(data.time.toString()),
+    //   performerId: 42,
+    //   description: data.description,
+    //   genre: data.genre,
+    //   owner: {
+    //     _id: Math.random(),
+    //     name: 'totes Real User',
+    //     photo:
+    //       'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
+    //   },
+    //   distance: (Math.random() * 10).toFixed(2),
+    // };
+    axios.post('/api/event', {
+      lat: newEventLoc.lat.toString(),
+      lng: newEventLoc.lng.toString(),
+      time: new Date(data.time).toString(),
       description: data.description,
       genre: data.genre,
-      owner: {
-        _id: Math.random(),
-        name: 'totes Real User',
-        photo:
-          'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
-      },
-      distance: (Math.random() * 10).toFixed(2),
-    };
+      ownerId: currentUser.id.toString(),
+    })
+      .then(() => {
+        axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
+          .then((results) => { setEvents(results.data); });
+      })
+      .catch((error) => {console.error(error)});
     setAddEventPopupOpen(false);
-    setEvents((currEvents) => (
-      [
-        ...currEvents,
-        newEvent,
-      ]
-    ));
   };
 
   return (

@@ -2,13 +2,14 @@
 import React, { useContext } from 'react';
 import AppContext from '../../../context';
 
-
 const CalRow = (props) => {
   const { time, owner, genre, distance } = props.event;
-  const dateArr = time.toString().split(' ');
+  const timeObj = new Date(time);
+  const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
   const currentUser = 'Keanu';
   const { userNameClick } = useContext(AppContext);
+
 
   const formatTime = (date) => {
     let hours = date.getHours();
@@ -20,8 +21,8 @@ const CalRow = (props) => {
     const strTime = `${hours}:${minutes} ${ampm}`;
     return strTime;
   };
-  const prettyTime = formatTime(time);
-  console.log(time);
+  const prettyTime = formatTime(timeObj);
+  console.log(timeObj);
 
   const addToMyEvents = (e) => {
     console.log(e);
@@ -43,8 +44,6 @@ const CalRow = (props) => {
     };
   })();
 
-  console.log('owner: ', owner, 'date: ', dateArr);
-
   return (
     <div
       style={rowStyle}
@@ -54,12 +53,12 @@ const CalRow = (props) => {
         alt="avatar of this busker"
         style={{ maxHeight: '2rem', maxWidth: '2rem' }}
       />
-      <div onClick={userNameClick} name={owner.name} style={{cursor: 'pointer'}}>{owner.name}</div>
+      <div onClick={userNameClick} name={owner.name} style={{ cursor: 'pointer' }}>{owner.name}</div>
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>
-      <div>{`${distance} miles`}</div>
-      <button type="button" onClick={addToMyEvents} style={{cursor: 'pointer'}}>
+      <div>{`${distance.toFixed(2)} miles`}</div>
+      <button type="button" onClick={addToMyEvents} style={{ cursor: 'pointer' }}>
         +
       </button>
     </div>

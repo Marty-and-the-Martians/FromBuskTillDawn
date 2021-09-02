@@ -37,11 +37,20 @@ const UserSchema = new Schema({
   },
   photo: {
     type: String,
-    default: null,
+    default: '',
   },
-  bio: String,
-  followers: Number,
-  cashappURL: String,
+  bio: {
+    type: String,
+    default: '',
+  },
+  followers: {
+    type: Number,
+    default: 0,
+  },
+  cashappURL: {
+    type: String,
+    default: '',
+  },
   following: [
     {
       user: {

@@ -9,12 +9,16 @@ import AppContext from '../../../context';
 const LoginForm = ({ setShowSignUpForm }) => {
   const [loginErrors, setLoginErrors] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const { setLoggedIn } = useContext(AppContext);
+  const { setLoggedIn, setCurrentUser } = useContext(AppContext);
   const { register, handleSubmit } = useForm();
 
   const handleLogin = (data) => {
     axios
       .post('/api/login', data)
+      .then((res) => {
+        const tokens = (res.data.token).split('.');
+        setCurrentUser(JSON.parse(atob(tokens[1])));
+      })
       .then(() => { setSubmitted(true); setLoggedIn(true); })
       .then(/* need to fetch or decode user info from the res user info */)
       .catch((err) => {
@@ -41,7 +45,7 @@ const LoginForm = ({ setShowSignUpForm }) => {
         </label>
         <label>
           Password:
-          <input type="text" {...register('password')} />
+          <input type="password" {...register('password')} />
         </label>
         <input type="submit" value="Log in!" />
         <div>

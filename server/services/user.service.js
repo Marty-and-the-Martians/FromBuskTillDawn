@@ -16,21 +16,34 @@ const readOne = async (userId) => {
 const createOne = async () => {
 };
 
-const update = async (userId, name, email, performer, zipcode, photoURL, bio, cashappURL, attendingEventId) => {
+const update = async (userId, name, email, zipcode, photoURL, bio, cashappURL) => {
   // verify valid session here
+  const updatedInfo = {};
 
-  return userDb.updateOne(userId, name, email, performer, zipcode, photoURL, bio, cashappURL, attendingEventId);
+  if (name) updatedInfo.name = name;
+  if (email) updatedInfo.email = email;
+  if (zipcode) updatedInfo.zipcode = zipcode;
+  if (photoURL) updatedInfo.photo = photoURL;
+  if (bio) updatedInfo.bio = bio;
+  if (cashappURL) updatedInfo.cashAppURL = cashappURL;
+
+  return userDb.updateOne(userId, updatedInfo);
 };
 
-const deleteAttendingEvent = async (userId) => {
+const addAttendingEvent = async (userId, eventId) => {
+  return await userDb.updateAttendingEvent(userId, eventId);
+};
+
+const deleteAttendingEvent = async (userId, eventId) => {
   // verify valid session here
 
-  return userDb.deleteOne(userId);
+  return userDb.deleteOneAttendingEvent(userId, eventId);
 };
 
 module.exports = {
   readOne,
   createOne,
   update,
+  addAttendingEvent,
   deleteAttendingEvent,
 };

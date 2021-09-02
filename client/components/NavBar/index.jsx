@@ -13,7 +13,6 @@ import AppContext from '../../context';
 import useStyles from '../hooks/useStyles';
 
 const NavBar = () => {
-  const [loggedOut, setLoggedOut] = useState(false);
   const {
     setLoggedIn, btnPath, setBtnPath, btnText, setBtnText, loggedIn,
     accountDeetsShowing, setAccountDeetsShowing, setCurrentUser,
@@ -31,7 +30,6 @@ const NavBar = () => {
   const handleLogout = () => {
     Cookies.remove('token');
     setLoggedIn(false);
-    setLoggedOut(true);
     setCurrentUser({});
   };
 

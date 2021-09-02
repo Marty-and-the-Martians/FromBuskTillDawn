@@ -31,7 +31,6 @@ const App = () => {
   const [eventFetchDate, setEventFetchDate] = useState(new Date().toString());
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
   const eventFetch = () => {
-    console.log("here it is", eventFetchDate);
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
       .then((results) => { console.log(eventFetchDate, results.data); setEvents(results.data); });
   };
@@ -40,9 +39,7 @@ const App = () => {
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
-      .then((results) => console.log('mySchedule: ', results.data,
-        // cleanMyCal(results.data)
-      ));
+      .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
   };
 
   const userNameClick = (e) => {

@@ -21,7 +21,6 @@ const CalRow = ({ event }) => {
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
   const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
-  // console.log('User: ', currentUser, 'Event:, ', event);
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();

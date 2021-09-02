@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useRef } from 'react';
 import {
-  GoogleMap, useLoadScript, Marker, InfoWindow,
+  GoogleMap, useLoadScript, Marker, InfoWindow, useGoogleMap,
 } from '@react-google-maps/api';
 import Search from './Search';
 import Locate from './Locate';
@@ -8,11 +8,6 @@ import NewEventForm from './NewEventForm';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
 import AppContext from '../../context';
-
-const center = {
-  lat: 39.7392,
-  lng: -104.9903,
-};
 
 const mapContainerStyle = {
   width: '100%',
@@ -36,6 +31,8 @@ const MapViewer = () => {
     setEvents,
     newEventLoc,
     setNewEventLoc,
+    center,
+    setCenter,
     selected,
     setSelected,
     addEventPopupOpen,
@@ -54,9 +51,11 @@ const MapViewer = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+    console.log(mapRef.current.center.lat);
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
+    setCenter({ lat, lng });
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
@@ -80,6 +79,8 @@ const MapViewer = () => {
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
+        onCenterChanged={() => {
+        }}
         options={options}
         onClick={handleMapClick}
         onLoad={onMapLoad}
@@ -131,7 +132,7 @@ const MapViewer = () => {
           <></>
         )}
       </GoogleMap>
-    </div >
+    </div>
   );
 };
 

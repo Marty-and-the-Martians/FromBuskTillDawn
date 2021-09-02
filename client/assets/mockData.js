@@ -224,4 +224,5 @@ export default {
   user2,
   mockEvents,
   loggedOnUser,
+  myEvents,
 };

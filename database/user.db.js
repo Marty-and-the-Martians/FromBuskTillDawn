@@ -29,7 +29,6 @@ const readOne = async (userId) => {
   } catch (err) {
     throw new Error('Error querying DB', { cause: err });
   }
-};
 
 const readUserSchedule = async (userId, lng, lat) => {
   try {

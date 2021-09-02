@@ -14,6 +14,7 @@ const readMany = async (lng, lat, range, startDate, endDate) => {
               type: 'Point',
               coordinates: [parseFloat(lng), parseFloat(lat)],
             },
+            query: { time: { $gte: startDate, $lte: endDate } },
             spherical: true,
             distanceField: 'distance',
             key: 'location',
@@ -74,6 +75,7 @@ const createOne = async (time, ownerId, lng, lat, genre, description) => {
 
     await User
       .findByIdAndUpdate(mongoose.Types.ObjectId(ownerId), {
+        performer: true,
         $push: { hostedEvents: event.id },
       })
       .session(session);

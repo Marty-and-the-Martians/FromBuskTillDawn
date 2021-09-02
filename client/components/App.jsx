@@ -39,8 +39,10 @@ const App = () => {
   };
 
   const fetchSessionInfo = () => {
-    const tokens = (Cookies.get('token')).split('.');
-    setCurrentUser(JSON.parse(atob(tokens[1])));
+    if (Cookies.get('token')) {
+      const tokens = (Cookies.get('token')).split('.');
+      setCurrentUser(JSON.parse(atob(tokens[1])));
+    }
   };
 
   const myCalendar = () => {

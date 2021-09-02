@@ -15,6 +15,24 @@ const useStyles = makeStyles((theme) => (
       display: 'flex',
       flexWrap: 'wrap',
     },
+    table: {
+      height: '100%',
+    },
+    tableContainer: {
+      height: '100%',
+    },
+    colName: {
+      cursor: 'pointer',
+    },
+    row: {
+      width: '100%',
+    },
+    userName: {
+      cursor: 'pointer',
+    },
+    btn: {
+      cursor: 'pointer',
+    },
     // toolbar: theme.mixins.toolbar,
     // main: {
     //   display: 'flex',

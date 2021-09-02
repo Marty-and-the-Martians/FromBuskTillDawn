@@ -31,15 +31,13 @@ const App = () => {
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
-      .then((results) => { console.log('proximity: ', results.data); setEvents(results.data); });
+      .then((results) => { setEvents(results.data); });
   };
 
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
-      .then((results) => console.log('mySchedule: ', results.data,
-      // cleanMyCal(results.data)
-      ));
+      .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
   };
 
   const userNameClick = (e) => {

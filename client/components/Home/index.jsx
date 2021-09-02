@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../../context';
 import MapViewer from '../MapViewer';
 import CalViews from './CalViews';
 
 const Home = () => {
+  const { currentUser } = useContext(AppContext);
   return (
     <div>
       <MapViewer />
       <button> Local Events </button>
-      <button> My Schedule </button>
+      {currentUser.id
+        ? <button> My Schedule </button>
+        : null}
       <CalViews />
     </div>
   );

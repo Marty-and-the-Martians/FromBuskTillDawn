@@ -15,7 +15,7 @@ import cleanMyCal from '../helperFuncs/cleanMyCal';
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
-  const [btnText, setBtnText] = useState('Sign in or Sign up');
+  const [btnText, setBtnText] = useState('Login');
   const [btnPath, setBtnPath] = useState('/');
   const [center, setCenter] = useState({
     lat: 39.7392,
@@ -37,7 +37,13 @@ const App = () => {
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
+<<<<<<< HEAD
+      .then((results) => console.log('mySchedule: ', results.data,
+        // cleanMyCal(results.data)
+      ));
+=======
       .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
+>>>>>>> 2df1543a91e65a3cd47edf3c21a53e8b2c39b010
   };
 
   const userNameClick = (e) => {
@@ -49,56 +55,50 @@ const App = () => {
   useEffect(eventFetch, [center]);
 
   return (
-    <>
-      <AppContext.Provider value={{
-        eventFetch,
-        myCalendar,
-        setLoggedIn,
-        setAccountDeetsShowing,
-        setBtnPath,
-        setBtnText,
-        setEvents,
-        setNewEventLoc,
-        setSelected,
-        setAddEventPopupOpen,
-        userNameClick,
-        setCurrentUser,
-        setCenter,
-        currentUser,
-        loggedIn,
-        accountDeetsShowing,
-        btnPath,
-        btnText,
-        events,
-        newEventLoc,
-        selected,
-        center,
-        addEventPopupOpen,
-        currentUser,
-      }}
-      >
-        <div>
-          <h1>From Busk 'till Dawn starter!</h1>
-        </div>
-        <Router>
-          <NavBar />
+    <AppContext.Provider value={{
+      eventFetch,
+      myCalendar,
+      setLoggedIn,
+      setAccountDeetsShowing,
+      setBtnPath,
+      setBtnText,
+      setEvents,
+      setNewEventLoc,
+      setSelected,
+      setAddEventPopupOpen,
+      userNameClick,
+      setCurrentUser,
+      setCenter,
+      currentUser,
+      loggedIn,
+      accountDeetsShowing,
+      btnPath,
+      btnText,
+      events,
+      newEventLoc,
+      selected,
+      center,
+      addEventPopupOpen,
+    }}
+    >
+      <Router>
+        <NavBar />
 
-          <hr />
+        <hr />
 
-          <Switch>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route exact path="/">
-              <Login />
-            </Route>
-            <Route exact path="/account">
-              <AccountDetails />
-            </Route>
-          </Switch>
-        </Router>
-      </AppContext.Provider>
-    </>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/account">
+            <AccountDetails />
+          </Route>
+        </Switch>
+      </Router>
+    </AppContext.Provider>
   );
 };
 

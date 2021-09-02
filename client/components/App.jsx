@@ -5,6 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import AppContext from '../context';
 import Home from './Home';
 import Login from './Login';
@@ -30,11 +31,19 @@ const App = () => {
   const [selected, setSelected] = useState(null);
   const [eventFetchDate, setEventFetchDate] = useState(new Date().toString());
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
+  const [currentPerformerProfile, setcurrentPerformerProfile] = useState('');
+
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
       .then((results) => { setEvents(results.data); });
   };
 
+  const fetchSessionInfo = () => {
+    if (Cookies.get('token')) {
+      const tokens = (Cookies.get('token')).split('.');
+      setCurrentUser(JSON.parse(atob(tokens[1])));
+    }
+  };
 
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
@@ -42,13 +51,11 @@ const App = () => {
       .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
   };
 
-  const userNameClick = (e) => {
-    console.log(e);
-  };
-
   useEffect(eventFetch, []);
 
   useEffect(eventFetch, [center, eventFetchDate]);
+  useEffect(fetchSessionInfo, []);
+  useEffect(eventFetch, [center]);
 
   return (
     <AppContext.Provider value={{
@@ -62,9 +69,10 @@ const App = () => {
       setNewEventLoc,
       setSelected,
       setAddEventPopupOpen,
-      userNameClick,
       setCurrentUser,
       setCenter,
+      setEventFetchDate,
+      setcurrentPerformerProfile,
       currentUser,
       loggedIn,
       accountDeetsShowing,
@@ -75,6 +83,8 @@ const App = () => {
       selected,
       center,
       addEventPopupOpen,
+      eventFetchDate,
+      currentPerformerProfile,
     }}
     >
       <Router>
@@ -97,5 +107,4 @@ const App = () => {
     </AppContext.Provider>
   );
 };
-
 export default App;

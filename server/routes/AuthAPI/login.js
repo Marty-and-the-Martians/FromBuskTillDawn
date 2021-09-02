@@ -40,6 +40,9 @@ const loginUser = (req, res) => {
           followers: user.followers,
           cashappURL: user.cashappURL,
         };
+
+        const currentDate = new Date();
+        const twentyMinutes = new Date(currentDate.getTime() + (20 * 60 * 1000));
         // Sign token
         jwt.sign(
           payload,
@@ -48,7 +51,7 @@ const loginUser = (req, res) => {
             expiresIn: 31556926, // 1 year in seconds
           },
           (err, token) => {
-            res.cookie('token', token, { httpOnly: true });
+            res.cookie('token', token, { expire: twentyMinutes });
             res.json({
               success: true,
               token: `Bearer ${token}`,

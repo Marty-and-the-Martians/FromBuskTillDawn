@@ -202,3 +202,22 @@ export default {
   myEvents,
   theirEvents,
 };
+
+// {
+//   "_id": "61304cacc064aebe23715f80",
+//   "time": "2021-09-02T04:01:38.000Z",
+//   "owner": [
+//       {
+//           "_id": "612ff1826651b38782379a52",
+//           "name": "jordan",
+//           "photo": ""
+//       }
+//   ],
+//   "genre": "Music",
+//   "description": "good music",
+//   "distance": 0.6085051375870345,
+//   "position": {
+//       "lng": -104.98343354492188,
+//       "lat": 39.74825798259517
+//   }
+// }

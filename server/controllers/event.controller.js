@@ -3,8 +3,10 @@ const { event } = require('../services');
 const keys = require('../../config/keys');
 
 const getEvents = (req, res, next) => {
-  const token = req.headers.cookie.slice(6);
-  jwt.verify(token, keys.secretOrKey);
+  // const token = req.headers.cookie.slice(6);
+  // jwt.verify(token, keys.secretOrKey);
+
+
   // take info of query or body if needed
   // how do we determine how many events to send by default? we want to populate the map but not slow it down
   // should we have a show event in range (x), have it be selectable with a max?
@@ -50,9 +52,9 @@ const postEvent = (req, res, next) => {
 
 const updateEvent = (req, res, next) => {
   // const { body: { time, position, genre, description } }
-  const { body, params: { eventId } } = req;
+  const { params: { eventId } } = req;
 
-  event.update(eventId, time, position, genre, description)
+  event.update(eventId, req.body)
     .then(() => {
       res.sendStatus(200);
     })

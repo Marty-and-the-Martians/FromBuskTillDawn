@@ -42,7 +42,7 @@ const readUserSchedule = async (userId, lng, lat) => {
           $lookup: {
             from: 'events',
             let: {
-              userId: '$_id', eventIds: '$hostedEvents',
+              userId: '$_id',
             },
             pipeline: [
               {
@@ -88,7 +88,7 @@ const readUserSchedule = async (userId, lng, lat) => {
           $lookup: {
             from: 'events',
             let: {
-              userId: '$_id',
+              userId: '$_id', eventId: '$attendingEvents',
             },
             pipeline: [
               {
@@ -99,7 +99,7 @@ const readUserSchedule = async (userId, lng, lat) => {
                     coordinates: [parseFloat(lng), parseFloat(lat)],
                   },
                   spherical: true,
-                  query: { $expr: { $ne: ['$owner', '$$userId'] } },
+                  query: { $expr: { $in: ['$_id', '$$eventId'] } },
                   distanceField: 'distance',
                   key: 'location',
                 },
@@ -148,11 +148,45 @@ const readUserSchedule = async (userId, lng, lat) => {
 const createOne = async () => { };
 
 // ////////////////////////      UPDATE      ////////////////////////////////////
-const updateOne = async () => {
+const updateOne = async (userId, updatedInfo) => {
+  try {
+    return await User
+      .updateOne({
+        _id: mongoose.Types.ObjectId(userId),
+      }, updatedInfo);
+  } catch (err) {
+    throw new Error('Error Querying DB', { cause: err });
+  }
+};
+
+const updateAttendingEvent = async (userId, eventId) => {
+  try {
+    const updated = await User
+      .updateOne({
+        _id: mongoose.Types.ObjectId(userId),
+      },
+      {
+        $push: { attendingEvents: [eventId] },
+      });
+    return updated;
+  } catch (err) {
+    throw new Error('Error Querying DB', { cause: err });
+  }
 };
 
 // ////////////////////////      DELETE      ////////////////////////////////////
-const deleteAttendingEvent = async () => {
+const deleteOneAttendingEvent = async (userId, eventId) => {
+  try {
+    return await User
+      .updateOne({
+        _id: mongoose.Types.ObjectId(userId),
+      },
+      {
+        $pullAll: { attendingEvents: [eventId] },
+      });
+  } catch (err) {
+    throw new Error('Error Querying DB', { cause: err });
+  }
 };
 
 module.exports = {
@@ -160,5 +194,6 @@ module.exports = {
   readUserSchedule,
   createOne,
   updateOne,
-  deleteAttendingEvent,
+  updateAttendingEvent,
+  deleteOneAttendingEvent,
 };

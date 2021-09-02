@@ -60,6 +60,18 @@ const MapViewer = () => {
     mapRef.current.setZoom(14);
   }, []);
 
+  const formatTime = (date) => {
+    console.log(typeof date);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours %= 12;
+    hours = hours || 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    const strTime = `${hours}:${minutes} ${ampm}`;
+    return strTime;
+  };
+
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
   return (
@@ -125,7 +137,11 @@ const MapViewer = () => {
             <>
               <div>{selected.description}</div>
               <div>{selected.genre}</div>
-              <div>{selected.time.toString()}</div>
+              <div>
+                {new Date(selected.time).toString().split(' ').slice(0, 3).join(' ')}
+                {' at '}
+                {formatTime(new Date(selected.time))}
+              </div>
             </>
           </InfoWindow>
         ) : (

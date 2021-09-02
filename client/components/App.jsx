@@ -21,9 +21,6 @@ const App = () => {
     lng: -104.9903,
   });
   const [currentUser, setCurrentUser] = useState({});
-  const userNameClick = (e) => {
-    console.log(e);
-  };
   const [events, setEvents] = useState([]);
   const [newEventLoc, setNewEventLoc] = useState({
     lat: null,
@@ -31,20 +28,29 @@ const App = () => {
   });
   const [selected, setSelected] = useState(null);
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
-
-  useEffect(() => {
+  const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
       .then((results) => { setEvents(results.data); });
-  }, []);
+  };
 
-  useEffect(() => {
-    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
+  const myCalendar = () => {
+    axios.get(`/api/event/${currentUser}?lng=${center.lng}&lat=${center.lat}`)
       .then((results) => { setEvents(results.data); });
-  }, [center]);
+  };
+
+  const userNameClick = (e) => {
+    console.log(e);
+  };
+
+  useEffect(eventFetch, []);
+
+  useEffect(eventFetch, [center]);
 
   return (
     <>
       <AppContext.Provider value={{
+        eventFetch,
+        myCalendar,
         setLoggedIn,
         setAccountDeetsShowing,
         setBtnPath,
@@ -62,10 +68,10 @@ const App = () => {
         events,
         newEventLoc,
         selected,
-        setSelected,
         center,
         setCenter,
         addEventPopupOpen,
+        currentUser,
       }}
       >
         <div>

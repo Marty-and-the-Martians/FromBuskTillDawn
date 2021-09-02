@@ -22,7 +22,7 @@ const CalRow = (props) => {
     return strTime;
   };
   const prettyTime = formatTime(timeObj);
-  console.log(timeObj);
+  // console.log(timeObj);
 
   const addToMyEvents = (e) => {
     console.log(e);
@@ -57,11 +57,7 @@ const CalRow = (props) => {
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>
-<<<<<<< HEAD
-      <div>{`${distance} miles`}</div>
-=======
       <div>{`${distance.toFixed(2)} miles`}</div>
->>>>>>> main
       <button type="button" onClick={addToMyEvents} style={{ cursor: 'pointer' }}>
         +
       </button>

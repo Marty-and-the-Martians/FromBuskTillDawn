@@ -37,8 +37,8 @@ const App = () => {
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
-      .then((results) => console.log('mySchedule: ', results.data,
-      // cleanMyCal(results.data)
+      .then((results) => console.log('mySchedule: ', results.data, 'Cleaned: ',
+      cleanMyCal(results.data)
       ));
   };
 

@@ -29,6 +29,8 @@ const App = () => {
   });
   const [selected, setSelected] = useState(null);
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
+  const [currentPerformerProfile, setcurrentPerformerProfile] = useState('');
+
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
       .then((results) => { setEvents(results.data); });
@@ -38,10 +40,6 @@ const App = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
       .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
-  };
-
-  const userNameClick = (e) => {
-    console.log(e);
   };
 
   useEffect(eventFetch, []);
@@ -61,9 +59,9 @@ const App = () => {
         setNewEventLoc,
         setSelected,
         setAddEventPopupOpen,
-        userNameClick,
         setCurrentUser,
         setCenter,
+        setcurrentPerformerProfile,
         currentUser,
         loggedIn,
         accountDeetsShowing,
@@ -74,7 +72,7 @@ const App = () => {
         selected,
         center,
         addEventPopupOpen,
-        currentUser,
+        currentPerformerProfile,
       }}
       >
         <div>

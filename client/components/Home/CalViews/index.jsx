@@ -19,7 +19,7 @@ const CalViews = () => {
   const { events } = useContext(AppContext);
 
   const sortTime = () => {
-    setSortedEvents([...events].sort((a, b) => (a.time - b.time)));
+    setSortedEvents([...events].sort((a, b) => (new Date(a.time) - new Date(b.time))));
   };
   const sortDistance = () => {
     setSortedEvents([...events].sort((a, b) => (a.distance - b.distance)));

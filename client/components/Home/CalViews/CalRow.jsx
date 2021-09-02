@@ -22,10 +22,6 @@ const CalRow = (props) => {
     return strTime;
   };
   const prettyTime = formatTime(time);
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
   const addToMyEvents = (e) => {
     console.log(e);
   };

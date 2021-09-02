@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useContext } from 'react';
 import AppContext from '../../context';
 import MapViewer from '../MapViewer';
@@ -8,9 +9,9 @@ const Home = () => {
   return (
     <div>
       <MapViewer />
-      <button> Local Events </button>
+      <button onClick={eventFetch}> Local Events </button>
       {currentUser.id
-        ? <button> My Schedule </button>
+        ? <button onClick={myCalendar}> My Schedule </button>
         : null}
       <CalViews />
     </div>

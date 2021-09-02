@@ -25,8 +25,8 @@ const CalRow = ({ event }) => {
 
   const prettyTime = formatTime(timeObj);
 
-  const addToMyEvents = (event) => {
-    const eventId = event.target.attributes[1].value;
+  const addToMyEvents = (e) => {
+    const eventId = e.target.attributes[1].value;
     const userId = currentUser.id;
     axios
       .put(`/api/user/${userId}/${eventId}`)

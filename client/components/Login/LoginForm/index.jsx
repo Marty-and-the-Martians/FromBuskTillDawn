@@ -20,8 +20,8 @@ const LoginForm = ({ setShowSignUpForm }) => {
         setCurrentUser(JSON.parse(atob(tokens[1])));
       })
       .then(() => { setSubmitted(true); setLoggedIn(true); })
-      .then(/* need to fetch or decode user info from the res user info */)
       .catch((err) => {
+        console.log(err);
         const errKeys = Object.keys(err.response.data);
         setLoginErrors(err.response.data[errKeys[0]]);
       });

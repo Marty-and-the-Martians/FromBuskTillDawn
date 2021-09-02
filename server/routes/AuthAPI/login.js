@@ -10,7 +10,6 @@ const { User } = require('../../../database/model');
 // @desc Login user and return JWT token
 // @access Public
 const loginUser = (req, res) => {
-  console.log(req.headers.cookie.slice(6));
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation

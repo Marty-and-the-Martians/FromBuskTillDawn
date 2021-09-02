@@ -40,11 +40,11 @@ const SignUpForm = ({ setShowSignUpForm }) => {
         </label>
         <label>
           Password:
-          <input type="text" {...register('password')} />
+          <input type="password" {...register('password')} />
         </label>
         <label>
           Confirm Password:
-          <input type="text" {...register('password2')} />
+          <input type="password" {...register('password2')} />
         </label>
         <input type="submit" value="Sign Up!" />
       </form>

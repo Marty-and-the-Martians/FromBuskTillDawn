@@ -17,6 +17,7 @@ const App = () => {
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
   const [btnPath, setBtnPath] = useState('/');
+  const [currentUser, setCurrentUser] = useState({});
   const userNameClick = (e) => {
     console.log(e);
   };
@@ -37,21 +38,22 @@ const App = () => {
       <AppContext.Provider value={{
         setLoggedIn,
         setAccountDeetsShowing,
+        setBtnPath,
+        setBtnText,
+        setEvents,
+        setNewEventLoc,
+        setSelected,
+        setAddEventPopupOpen,
+        userNameClick,
+        setCurrentUser,
         loggedIn,
         accountDeetsShowing,
         btnPath,
-        setBtnPath,
         btnText,
-        setBtnText,
         events,
-        setEvents,
         newEventLoc,
-        setNewEventLoc,
         selected,
-        setSelected,
         addEventPopupOpen,
-        setAddEventPopupOpen,
-        userNameClick,
       }}
       >
         <div>

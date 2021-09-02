@@ -28,17 +28,20 @@ const App = () => {
     lng: null,
   });
   const [selected, setSelected] = useState(null);
+  const [eventFetchDate, setEventFetchDate] = useState(new Date().toString());
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
   const eventFetch = () => {
-    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
-      .then((results) => { console.log('proximity: ', results.data); setEvents(results.data); });
+    console.log("here it is", eventFetchDate);
+    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
+      .then((results) => { console.log(eventFetchDate, results.data); setEvents(results.data); });
   };
+
 
   const myCalendar = () => {
     // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
       .then((results) => console.log('mySchedule: ', results.data,
-      // cleanMyCal(results.data)
+        // cleanMyCal(results.data)
       ));
   };
 
@@ -48,7 +51,7 @@ const App = () => {
 
   useEffect(eventFetch, []);
 
-  useEffect(eventFetch, [center]);
+  useEffect(eventFetch, [center, eventFetchDate]);
 
   return (
     <>
@@ -66,6 +69,8 @@ const App = () => {
         userNameClick,
         setCurrentUser,
         setCenter,
+        setEventFetchDate,
+        eventFetchDate,
         currentUser,
         loggedIn,
         accountDeetsShowing,

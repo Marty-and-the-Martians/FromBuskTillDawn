@@ -20,7 +20,7 @@ const CalRow = ({ event }) => {
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
+  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected } = useContext(AppContext);
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -68,7 +68,7 @@ const CalRow = ({ event }) => {
   }
 
   return (
-    <TableRow color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
+    <TableRow  onClick={() => { setSelected(event); console.log(event); }} color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
       <TableCell>
         <Avatar
           alt={owner[0].name}

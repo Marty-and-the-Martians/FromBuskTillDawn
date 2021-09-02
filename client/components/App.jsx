@@ -10,6 +10,7 @@ import Home from './Home';
 import Login from './Login';
 import NavBar from './NavBar';
 import AccountDetails from './AccountDetails';
+import cleanMyCal from '../helperFuncs/cleanMyCal';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -30,12 +31,15 @@ const App = () => {
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
-      .then((results) => { setEvents(results.data); });
+      .then((results) => { console.log('proximity: ', results.data); setEvents(results.data); });
   };
 
   const myCalendar = () => {
-    axios.get(`/api/event/${currentUser}?lng=${center.lng}&lat=${center.lat}`)
-      .then((results) => { setEvents(results.data); });
+    // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
+    axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
+      .then((results) => console.log('mySchedule: ', results.data,
+      // cleanMyCal(results.data)
+      ));
   };
 
   const userNameClick = (e) => {

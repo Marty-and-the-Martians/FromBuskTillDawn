@@ -51,7 +51,7 @@ const MapViewer = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
-    console.log(mapRef.current.center.lat);
+    // console.log(mapRef.current.center.lat);
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {

@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Marty-and-the-Martians/FromBuskTillDawn#readme",
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@reach/combobox": "^0.16.1",
     "@react-google-maps/api": "^2.2.0",
     "axios": "^0.21.1",

@@ -61,10 +61,8 @@ const UserSchema = new Schema({
   ],
   hostedEvents: [
     {
-      event: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Event',
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event',
     },
   ],
   attendingEvents: [

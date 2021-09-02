@@ -1,45 +1,47 @@
 const mongoose = require('mongoose');
 const { Event, User } = require('./model');
 
+// ////////////////////////      READ      ////////////////////////////////////
 const readMany = async (lng, lat, range, startDate, endDate) => {
   try {
     const events = await Event
-      .aggregate([{
-        $geoNear: {
-          maxDistance: range * 1609.34, // 1609.34 meters in a mile,
-          distanceMultiplier: 1 / 1609.34,
-          near: {
-            type: 'Point',
-            coordinates: [parseFloat(lng), parseFloat(lat)],
+      .aggregate([
+        {
+          $geoNear: {
+            maxDistance: range * 1609.34, // 1609.34 meters in a mile,
+            distanceMultiplier: 1 / 1609.34,
+            near: {
+              type: 'Point',
+              coordinates: [parseFloat(lng), parseFloat(lat)],
+            },
+            spherical: true,
+            distanceField: 'distance',
+            key: 'location',
           },
-          spherical: true,
-          distanceField: 'distance',
-          key: 'location',
         },
-      },
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'owner',
-          foreignField: '_id',
-          as: 'owner',
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'owner',
+            foreignField: '_id',
+            as: 'owner',
+          },
         },
-      },
-      {
-        $project: {
-          _id: 1,
-          time: 1,
-          'owner._id': 1,
-          'owner.name': 1,
-          'owner.photo': 1,
-          // location: 0,
-          'position.lng': { $arrayElemAt: ['$location.coordinates', 0] },
-          'position.lat': { $arrayElemAt: ['$location.coordinates', 1] },
-          genre: 1,
-          description: 1,
-          distance: 1,
+        {
+          $project: {
+            _id: 1,
+            time: 1,
+            'owner._id': 1,
+            'owner.name': 1,
+            'owner.photo': 1,
+            // location: 0,
+            'position.lng': { $arrayElemAt: ['$location.coordinates', 0] },
+            'position.lat': { $arrayElemAt: ['$location.coordinates', 1] },
+            genre: 1,
+            description: 1,
+            distance: 1,
+          },
         },
-      },
       ]);
     return events;
   } catch (err) {
@@ -47,6 +49,7 @@ const readMany = async (lng, lat, range, startDate, endDate) => {
   }
 };
 
+// ////////////////////////      CREATE      ////////////////////////////////////
 const createOne = async (time, ownerId, lng, lat, genre, description) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -84,6 +87,7 @@ const createOne = async (time, ownerId, lng, lat, genre, description) => {
   }
 };
 
+// ////////////////////////      UPDATE      ////////////////////////////////////
 const updateOne = async (eventId, time, position, genre, description) => {
   try {
   } catch (err) {
@@ -91,6 +95,7 @@ const updateOne = async (eventId, time, position, genre, description) => {
   }
 };
 
+// ////////////////////////      DELETE      ////////////////////////////////////
 const deleteOne = async (eventId) => {
   try {
   } catch (err) {

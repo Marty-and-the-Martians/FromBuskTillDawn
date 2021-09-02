@@ -59,7 +59,8 @@ const PerformerProfile = () => {
 
   return (
     <>
-      { performerData && performerEvents.length
+      <MapViewer />
+      {performerData && performerEvents.length
         ? (
           <div>
             <h3>Performer Profile </h3>

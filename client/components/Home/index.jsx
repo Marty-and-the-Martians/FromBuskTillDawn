@@ -15,6 +15,7 @@ const Home = () => {
     currentUser,
     eventFetchDate,
     setEventFetchDate,
+    setSelected,
   } = useContext(AppContext);
   return (
     <SplitPane
@@ -22,7 +23,14 @@ const Home = () => {
       right={(
         <Container>
           <Container>
-            <input type="date" value={new Date(eventFetchDate).toISOString().slice(0, 10)} onChange={(event) => { setEventFetchDate(new Date(new Date(event.target.value).getTime() + (6 * 60 * 60 * 1001)).toString()); }} />
+            <input
+              type="date"
+              value={new Date(eventFetchDate).toISOString().slice(0, 10)}
+              onChange={(event) => {
+                setEventFetchDate(new Date(new Date(event.target.value).getTime() + (6 * 60 * 60 * 1001)).toString());
+                setSelected(null);
+              }}
+            />
             <button onClick={eventFetch}> Local Events </button>
             {currentUser.id
               ? <button onClick={myCalendar}> My Schedule </button>

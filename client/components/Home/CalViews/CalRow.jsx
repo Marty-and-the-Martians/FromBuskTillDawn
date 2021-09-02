@@ -57,7 +57,7 @@ const CalRow = (props) => {
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>
-      <div>{`${distance} miles`}</div>
+      <div>{`${distance.toFixed(2)} miles`}</div>
       <button type="button" onClick={addToMyEvents} style={{ cursor: 'pointer' }}>
         +
       </button>

@@ -13,7 +13,7 @@ const readOne = async (userId) => {
       photo: 1,
       bio: 1,
       followers: 1,
-      cashappUrl: 1,
+      cashappURL: 1,
     };
 
     const user = await User

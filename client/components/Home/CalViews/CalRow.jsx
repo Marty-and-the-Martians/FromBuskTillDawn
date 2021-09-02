@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import AppContext from '../../../context';
 
-
 const CalRow = ({ event }) => {
   const {
     time, owner, genre, distance,

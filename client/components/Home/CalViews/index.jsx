@@ -7,7 +7,7 @@ const CalViews = () => {
   const { events } = useContext(AppContext);
 
   const sortTime = () => {
-    setSortedEvents([...events].sort((a, b) => (a.time - b.time)));
+    setSortedEvents([...events].sort((a, b) => (new Date(a.time) - new Date(b.time))));
   };
   const sortDistance = () => {
     setSortedEvents([...events].sort((a, b) => (a.distance - b.distance)));
@@ -23,8 +23,8 @@ const CalViews = () => {
   };
   const sortName = () => {
     setSortedEvents([...events].sort((a, b) => {
-      const first = a.owner.name.toUpperCase();
-      const second = b.owner.name.toUpperCase();
+      const first = a.owner[0].name.toUpperCase();
+      const second = b.owner[0].name.toUpperCase();
       if (first < second) { return -1; }
       if (second < first) { return 1; }
       return 0;

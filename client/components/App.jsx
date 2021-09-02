@@ -31,6 +31,7 @@ const App = () => {
   const [selected, setSelected] = useState(null);
   const [eventFetchDate, setEventFetchDate] = useState(new Date().toString());
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
+
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
       .then((results) => { setEvents(results.data); });
@@ -72,6 +73,7 @@ const App = () => {
       userNameClick,
       setCurrentUser,
       setCenter,
+      setEventFetchDate,
       currentUser,
       loggedIn,
       accountDeetsShowing,
@@ -82,6 +84,7 @@ const App = () => {
       selected,
       center,
       addEventPopupOpen,
+      eventFetchDate,
     }}
     >
       <Router>

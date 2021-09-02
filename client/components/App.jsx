@@ -32,7 +32,7 @@ const App = () => {
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
   const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}&date=${eventFetchDate}`)
-      .then((results) => { console.log(eventFetchDate, results.data); setEvents(results.data); });
+      .then((results) => { setEvents(results.data); });
   };
 
 

@@ -6,10 +6,15 @@ const useStyles = makeStyles((theme) => (
       display: 'flex',
       justifyContent: 'space-between',
     },
-    // btn: {
-    //   background: 'white',
-    //   marginLeft: '10px',
-    // },
+    pane: {
+      width: '50%',
+      minWidth: '450px',
+      marginBottom: '1rem',
+    },
+    viewWindow: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
     // toolbar: theme.mixins.toolbar,
     // main: {
     //   display: 'flex',

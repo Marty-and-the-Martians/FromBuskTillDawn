@@ -75,7 +75,7 @@ const MapViewer = () => {
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
   return (
-    <div style={{ width: '50vw', height: '50vh' }}>
+    <div style={{ width: '100%', height: '50vh' }}>
       <span style={{
         position: 'absolute',
         zIndex: '5',
@@ -135,8 +135,8 @@ const MapViewer = () => {
             }}
           >
             <>
-              <div>Genre: {selected.genre}</div>
               <div>Description: {selected.description}</div>
+              <div>Genre: {selected.genre}</div>
               <div>
                 {new Date(selected.time).toString().split(' ').slice(0, 3).join(' ')}
                 {' at '}

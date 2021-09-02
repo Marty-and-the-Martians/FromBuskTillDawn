@@ -1,13 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
 import AppContext from '../../../context';
+import useStyles from '../../hooks/useStyles';
+
 import CalRow from './CalRow';
 
 const CalViews = () => {
+  const classes = useStyles();
   const [sortedEvents, setSortedEvents] = useState([]);
   const { events } = useContext(AppContext);
 
   const sortTime = () => {
-    setSortedEvents([...events].sort((a, b) => (a.time - b.time)));
+    setSortedEvents([...events].sort((a, b) => (new Date(a.time) - new Date(b.time))));
   };
   const sortDistance = () => {
     setSortedEvents([...events].sort((a, b) => (a.distance - b.distance)));
@@ -39,18 +51,34 @@ const CalViews = () => {
   }, [events]);
 
   return (
-    <>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+    <TableContainer className={classes.tableContainer} component={Paper}>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell onClick={sortName} className={classes.colName}>Busker</TableCell>
+            <TableCell onClick={sortGenre} className={classes.colName}>Genre</TableCell>
+            <TableCell onClick={sortTime} className={classes.colName}>Date</TableCell>
+            <TableCell onClick={sortTime} className={classes.colName}>Time</TableCell>
+            <TableCell onClick={sortDistance} className={classes.colName}>Distance</TableCell>
+            <TableCell />
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {sortedEvents.map((event) => (
+            <CalRow event={event} key={event._id} />
+          ))}
+        </TableBody>
+        {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
         <div onClick={sortName} value="performer" style={{ cursor: 'pointer' }}> Busker </div>
         <div onClick={sortGenre} value="genre" style={{ cursor: 'pointer' }}> Genre </div>
         <div onClick={sortTime} value="date" style={{ cursor: 'pointer' }}> Date </div>
         <div onClick={sortTime} value="date" style={{ cursor: 'pointer' }}> Time </div>
         <div onClick={sortDistance} value="distance" style={{ cursor: 'pointer' }}> Distance </div>
-      </div>
-      {sortedEvents.map((event) => (
-        <CalRow event={event} key={event._id} />
-      ))}
-    </>
+      </div> */}
+      </Table>
+    </TableContainer>
   );
 };
 export default CalViews;

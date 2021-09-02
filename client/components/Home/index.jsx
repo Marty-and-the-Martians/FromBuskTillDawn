@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
+import AppContext from '../../context';
 import MapViewer from '../MapViewer';
 import CalViews from './CalViews';
-import AppContext from '../../context';
 
 const Home = () => {
-  const { eventFetch, myCalendar } = useContext(AppContext);
+  const { eventFetch, myCalendar, currentUser } = useContext(AppContext);
   return (
     <div>
       <MapViewer />
-      <button onClick={eventFetch}> Local Events </button>
-      <button onClick={myCalendar}> My Schedule </button>
+      <button> Local Events </button>
+      {currentUser.id
+        ? <button> My Schedule </button>
+        : null}
       <CalViews />
     </div>
   );

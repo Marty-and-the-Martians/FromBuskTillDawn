@@ -2,7 +2,33 @@ const mongoose = require('mongoose');
 const { User } = require('./model');
 
 // ////////////////////////      READ      ////////////////////////////////////
-const readOne = async () => {
+const readOne = async (userId) => {
+  try {
+    const userInfo = {
+      _id: 1,
+      name: 1,
+      date: 1,
+      performer: 1,
+      zipcode: 1,
+      photo: 1,
+      bio: 1,
+      followers: 1,
+      cashappUrl: 1,
+    };
+
+    const user = await User
+      .aggregate([
+        {
+          $match: { _id: mongoose.Types.ObjectId(userId) },
+        },
+        {
+          $project: userInfo,
+        },
+      ]);
+    return user;
+  } catch (err) {
+    throw new Error('Error querying DB', { cause: err });
+  }
 };
 
 const readUserSchedule = async (userId, lng, lat) => {

@@ -6,7 +6,6 @@ const readOne = async (userId) => {
   // formating data, dates, etc...
 
   // verify valid session here
-  const wantOwnInfo = true;
 
   return userDb.readOne(userId, wantOwnInfo);
 

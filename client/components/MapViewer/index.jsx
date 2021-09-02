@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useRef } from 'react';
 import {
-  GoogleMap, useLoadScript, Marker, InfoWindow,
+  GoogleMap, useLoadScript, Marker, InfoWindow, useGoogleMap,
 } from '@react-google-maps/api';
 import Search from './Search';
 import Locate from './Locate';
@@ -8,11 +8,6 @@ import NewEventForm from './NewEventForm';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
 import AppContext from '../../context';
-
-const center = {
-  lat: 39.7392,
-  lng: -104.9903,
-};
 
 const mapContainerStyle = {
   width: '100%',
@@ -36,6 +31,8 @@ const MapViewer = () => {
     setEvents,
     newEventLoc,
     setNewEventLoc,
+    center,
+    setCenter,
     selected,
     setSelected,
     addEventPopupOpen,
@@ -54,31 +51,48 @@ const MapViewer = () => {
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+    console.log(mapRef.current.center.lat);
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
+    setCenter({ lat, lng });
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
+
+  const formatTime = (date) => {
+    console.log(typeof date);
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours %= 12;
+    hours = hours || 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    const strTime = `${hours}:${minutes} ${ampm}`;
+    return strTime;
+  };
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
   return (
     <div style={{ width: '50vw', height: '50vh' }}>
-      <div style={{
+      <span style={{
         position: 'absolute',
         zIndex: '5',
         marginLeft: '15em',
+        display: 'flex',
       }}
       >
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
-      </div>
+      </span>
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}
         center={center}
+        onCenterChanged={() => {
+        }}
         options={options}
         onClick={handleMapClick}
         onLoad={onMapLoad}
@@ -123,14 +137,18 @@ const MapViewer = () => {
             <>
               <div>{selected.description}</div>
               <div>{selected.genre}</div>
-              <div>{selected.time.toString()}</div>
+              <div>
+                {new Date(selected.time).toString().split(' ').slice(0, 3).join(' ')}
+                {' at '}
+                {formatTime(new Date(selected.time))}
+              </div>
             </>
           </InfoWindow>
         ) : (
           <></>
         )}
       </GoogleMap>
-    </div >
+    </div>
   );
 };
 

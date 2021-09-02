@@ -4,8 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-
-import data from '../assets/mockData';
+import axios from 'axios';
 import AppContext from '../context';
 import Home from './Home';
 import Login from './Login';
@@ -17,6 +16,10 @@ const App = () => {
   const [accountDeetsShowing, setAccountDeetsShowing] = useState(false);
   const [btnText, setBtnText] = useState('Sign in or Sign up');
   const [btnPath, setBtnPath] = useState('/');
+  const [center, setCenter] = useState({
+    lat: 39.7392,
+    lng: -104.9903,
+  });
   const [currentUser, setCurrentUser] = useState({});
   const userNameClick = (e) => {
     console.log(e);
@@ -30,8 +33,14 @@ const App = () => {
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
 
   useEffect(() => {
-    setEvents(data.mockEvents);
+    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
+      .then((results) => { setEvents(results.data); });
   }, []);
+
+  useEffect(() => {
+    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
+      .then((results) => { setEvents(results.data); });
+  }, [center]);
 
   return (
     <>
@@ -53,6 +62,9 @@ const App = () => {
         events,
         newEventLoc,
         selected,
+        setSelected,
+        center,
+        setCenter,
         addEventPopupOpen,
       }}
       >

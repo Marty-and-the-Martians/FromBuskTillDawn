@@ -3,8 +3,9 @@ import AppContext from '../../../context';
 import CalRow from './CalRow';
 
 const CalViews = () => {
-  const { events } = useContext(AppContext);
   const [sortedEvents, setSortedEvents] = useState([]);
+  const { events } = useContext(AppContext);
+
   const sortTime = () => {
     setSortedEvents([...events].sort((a, b) => (a.time - b.time)));
   };

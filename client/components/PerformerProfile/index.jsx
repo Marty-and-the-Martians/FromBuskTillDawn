@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import MapViewer from '../MapViewer';
 
 const PerformerProfile = () => {
 
@@ -12,7 +13,10 @@ const PerformerProfile = () => {
   // ));
 
   return (
-    <div>PERFORMER PROFILE GOES HERE</div>
+    <div>
+      <MapViewer />
+      PERFORMER PROFILE GOES HERE
+    </div>
     // <div>
     //   <h3>Account Settings</h3>
     //   <button type="button">edit profile</button>

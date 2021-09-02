@@ -13,7 +13,7 @@ const CalRow = ({ event }) => {
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
+  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected } = useContext(AppContext);
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -64,6 +64,7 @@ const CalRow = ({ event }) => {
     <div
       style={rowStyle}
       value={event._id}
+      onClick={() => { setSelected(event); console.log(event); }}
     >
       <img
         src={owner[0].photo}

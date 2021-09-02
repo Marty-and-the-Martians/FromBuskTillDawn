@@ -28,7 +28,7 @@ const LoginForm = ({ setShowSignUpForm }) => {
   };
 
   if (submitted) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/" />;
   }
 
   return (

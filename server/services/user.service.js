@@ -16,16 +16,16 @@ const readOne = async (userId) => {
 const createOne = async () => {
 };
 
-const update = async (userId, name, email, zipcode, photoURL, bio, cashappURL) => {
+const update = async (userId, updatedInfo) => {
   // verify valid session here
-  const updatedInfo = {};
+  // const updatedInfo = {};
 
-  if (name) updatedInfo.name = name;
-  if (email) updatedInfo.email = email;
-  if (zipcode) updatedInfo.zipcode = zipcode;
-  if (photoURL) updatedInfo.photo = photoURL;
-  if (bio) updatedInfo.bio = bio;
-  if (cashappURL) updatedInfo.cashAppURL = cashappURL;
+  // if (name) updatedInfo.name = name;
+  // if (email) updatedInfo.email = email;
+  // if (zipcode) updatedInfo.zipcode = zipcode;
+  // if (photoURL) updatedInfo.photo = photoURL;
+  // if (bio) updatedInfo.bio = bio;
+  // if (cashappURL) updatedInfo.cashAppURL = cashappURL;
 
   return userDb.updateOne(userId, updatedInfo);
 };

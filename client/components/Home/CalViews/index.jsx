@@ -7,7 +7,6 @@ const CalViews = () => {
   const { loggedIn, events } = useContext(AppContext);
   const [currentCal, setCurrentCal] = useState('nearest');
   const { user } = Data;
-  console.log(events);
   return (
     <>
       <input type="text" placeholder="Search" />

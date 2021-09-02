@@ -31,6 +31,7 @@ const NewEventForm = () => {
       },
       distance: (Math.random() * 10).toFixed(2),
     };
+    console.log(data.time.toString());
     setAddEventPopupOpen(false);
     setEvents((currEvents) => (
       [

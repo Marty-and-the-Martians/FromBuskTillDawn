@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import AppContext from '../../context';
 import MapViewer from '../MapViewer';
 import CalViews from './CalViews';
+import AppContext from '../../context';
 
 const Home = () => {
-  const { currentUser } = useContext(AppContext);
+  const { eventFetch, myCalendar, currentUser } = useContext(AppContext);
   return (
     <div>
       <MapViewer />

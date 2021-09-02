@@ -11,7 +11,8 @@ router.post('/login', loginUser);
 router.post('/register', registerUser);
 router.get('/user/:userId', user.get.getUser);
 router.put('/user/:userId', user.put.updateUser);
-router.delete('user/:userId/:eventType/:eventId');
+router.put('/user/:userId/:eventId', user.put.addAttendingEvent);
+router.delete('/user/:userId/:eventId', user.delete.deleteEvent);
 
 router.get('/event', event.get.getEvents);
 router.get('/event/:userId', event.get.getEvents);

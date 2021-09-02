@@ -31,9 +31,27 @@ const create = async (time = new Date(), ownerId, lng, lat, genre, description) 
   return eventDb.createOne(time, ownerId, lng, lat, genre, description);
 };
 
-const update = async (eventId, time, position, genre, description) => {
+const update = async (eventId, updatedInfo) => {
   // verify valid session here
-   return eventDb.updateOne(eventId, time, position, genre, description);
+  if (updatedInfo.lng || updatedInfo.lat) {
+    const otherInfo = {};
+    const {
+      lat,
+      lng,
+      time,
+      genre,
+      description,
+    } = updatedInfo;
+    if (time) otherInfo.time = time;
+    if (genre) otherInfo.genre = genre;
+    if (description) otherInfo.description = description;
+    otherInfo.location = {
+      type: 'Point',
+      coordinates: [lng, lat],
+    };
+    return eventDb.updateOne(eventId, otherInfo);
+  }
+  return eventDb.updateOne(eventId, updatedInfo);
 };
 
 const deleteEvent = async (eventId) => {

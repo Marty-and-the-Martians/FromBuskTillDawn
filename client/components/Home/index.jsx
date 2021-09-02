@@ -10,7 +10,7 @@ const Home = () => {
     <div>
       <MapViewer />
       <input type="date" value={new Date(eventFetchDate).toISOString().slice(0, 10)} onChange={(event) => { setEventFetchDate(new Date(new Date(event.target.value).getTime() + (6 * 60 * 60 * 1001)).toString()); }} />
-      <button> Local Events </button>
+      <button onClick={eventFetch}> Local Events </button>
       {currentUser.id
         ? <button onClick={myCalendar}> My Schedule </button>
         : null}

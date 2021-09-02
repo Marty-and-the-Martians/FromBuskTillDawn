@@ -24,18 +24,11 @@ const updateUser = (req, res, next) => {
 
   const {
     params: { userId },
-    body: {
-      name,
-      email,
-      zipcode,
-      photo,
-      bio,
-      cashappURL,
-    },
+    body,
   } = req;
 
   // const { params, query, body } = req;
-  user.update(userId, name, email, zipcode, photo, bio, cashappURL)
+  user.update(userId, body)
     .then(() => {
       res.sendStatus(200);
     })

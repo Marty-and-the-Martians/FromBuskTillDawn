@@ -12,6 +12,7 @@ import Login from './Login';
 import NavBar from './NavBar';
 import AccountDetails from './AccountDetails';
 import cleanMyCal from '../helperFuncs/cleanMyCal';
+import PerformerProfile from './PerformerProfile';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -84,12 +85,9 @@ const App = () => {
       center,
       addEventPopupOpen,
       eventFetchDate,
-      currentPerformerProfile
+      currentPerformerProfile,
     }}
     >
-      <div>
-        <h1>From Busk 'till Dawn starter!</h1>
-      </div>
       <Router>
         <NavBar />
 
@@ -104,6 +102,9 @@ const App = () => {
           </Route>
           <Route exact path="/account">
             <AccountDetails />
+          </Route>
+          <Route path="/performer">
+            <PerformerProfile />
           </Route>
         </Switch>
       </Router>

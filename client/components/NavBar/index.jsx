@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import AppContext from '../../context';
 import useStyles from '../hooks/useStyles';
@@ -42,12 +44,16 @@ const NavBar = () => {
         </IconButton>
         <Button color="inherit"> </Button>
         */}
-        <Button variant="contained">
-          <Link onClick={handleClick} to={btnPath}>
-            {btnText}
-          </Link>
-        </Button>
-
+        <ButtonGroup variant="contained" aria-label="text primary button group">
+          <Button>
+            <Link onClick={handleClick} to={btnPath}>
+              {btnText}
+            </Link>
+          </Button>
+          {loggedIn
+            ? <Button onClick={handleLogout}>Logout</Button>
+            : null }
+        </ButtonGroup>
       </Toolbar>
     </AppBar>
   );

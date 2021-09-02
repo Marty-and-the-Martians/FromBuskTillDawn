@@ -84,12 +84,9 @@ const App = () => {
       center,
       addEventPopupOpen,
       eventFetchDate,
-      currentPerformerProfile
+      currentPerformerProfile,
     }}
     >
-      <div>
-        <h1>From Busk 'till Dawn starter!</h1>
-      </div>
       <Router>
         <NavBar />
 

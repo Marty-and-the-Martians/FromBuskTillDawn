@@ -2,10 +2,17 @@
 import React, { useContext } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+
+import useStyles from '../../hooks/useStyles';
 import AppContext from '../../../context';
 
-
 const CalRow = ({ event }) => {
+  const classes = useStyles();
   const {
     time, owner, genre, distance,
   } = event;
@@ -14,7 +21,7 @@ const CalRow = ({ event }) => {
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
   const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
-  console.log('User: ', currentUser, 'Event:, ', event);
+  // console.log('User: ', currentUser, 'Event:, ', event);
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -28,16 +35,16 @@ const CalRow = ({ event }) => {
 
   const prettyTime = formatTime(timeObj);
 
-  const addToMyEvents = (e) => {
-    const eventId = e.target.attributes[1].value;
+  const addToMyEvents = (e, eventId) => {
+    // const eventId = e.target.attributes[1].value;
     const userId = currentUser.id;
     axios
       .put(`/api/user/${userId}/${eventId}`)
       .then(myCalendar());
   };
 
-  const userNameClick = (e) => {
-    const id = e.target.getAttribute('id');
+  const userNameClick = (e, id) => {
+    // const id = e.target.getAttribute('id');
     setcurrentPerformerProfile(id);
   };
 
@@ -62,24 +69,62 @@ const CalRow = ({ event }) => {
   }
 
   return (
-    <div
-      style={rowStyle}
-      value={event._id}
-    >
-      <img
-        src={owner.photo}
-        alt="avatar of this busker"
-        style={{ maxHeight: '2rem', maxWidth: '2rem' }}
-      />
-      <div onClick={userNameClick} id={performerId} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
-      <div>{genre}</div>
-      <div>{eventDay}</div>
-      <div>{prettyTime}</div>
-      <div>{`${distance.toFixed(2)} miles`}</div>
-      {currentUser.name === owner[0].name
-        ? <div />
-        : <button type="button" value={event._id} onClick={addToMyEvents} style={{ cursor: 'pointer' }}> + </button>}
-    </div>
+    <TableRow color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
+      <TableCell>
+        <Avatar
+          alt={owner[0].name}
+          src={owner[0].photo}
+        />
+        {/* <img
+          src={owner.photo}
+          alt="avatar of this busker"
+          style={{ maxHeight: '2rem', maxWidth: '2rem' }}
+        /> */}
+      </TableCell>
+      <TableCell
+        onClick={(e) => { userNameClick(e, performerId); }}
+        id={performerId}
+        className={classes.userName}
+      >
+        {owner[0].name}
+      </TableCell>
+      <TableCell>{genre}</TableCell>
+      <TableCell>{eventDay}</TableCell>
+      <TableCell>{prettyTime}</TableCell>
+      <TableCell>{`${distance.toFixed(2)} mi.`}</TableCell>
+      <TableCell>
+        {
+          currentUser.name !== owner[0].name ? (
+            <Button
+              type="button"
+              value={event._id}
+              onClick={(e) => { addToMyEvents(e, event._id); }}
+              className={classes.btn}
+            >
+              +
+            </Button>
+          ) : (null)
+        }
+      </TableCell>
+    </TableRow>
+    // <div
+    //   style={rowStyle}
+    //   value={event._id}
+    // >
+    //   <img
+    //     src={owner.photo}
+    //     alt="avatar of this busker"
+    //     style={{ maxHeight: '2rem', maxWidth: '2rem' }}
+    //   />
+    //   <div onClick={userNameClick} id={performerId} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
+    //   <div>{genre}</div>
+    //   <div>{eventDay}</div>
+    //   <div>{prettyTime}</div>
+    //   <div>{`${distance.toFixed(2)} miles`}</div>
+    //   {currentUser.name === owner[0].name
+    //     ? <div />
+    //     : <button type="button" value={event._id} onClick={addToMyEvents} style={{ cursor: 'pointer' }}> + </button>}
+    // </div>
   );
 };
 export default CalRow;

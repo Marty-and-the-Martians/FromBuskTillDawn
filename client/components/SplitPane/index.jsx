@@ -6,7 +6,7 @@ import useStyles from '../hooks/useStyles';
 const SplitPane = ({ left, right }) => {
   const classes = useStyles();
   return (
-    <Container maxWidt="xl" className={classes.viewWindow}>
+    <Container maxWidth="xl" className={classes.viewWindow}>
       <Container className={classes.pane}>
         {left}
       </Container>

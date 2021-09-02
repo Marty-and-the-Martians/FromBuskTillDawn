@@ -24,22 +24,30 @@ const updateUser = (req, res, next) => {
 
   const {
     params: { userId },
-    query: {
-      attendingEventId,
-    },
     body: {
       name,
       email,
-      performer,
       zipcode,
-      photoURL,
+      photo,
       bio,
       cashappURL,
     },
   } = req;
 
   // const { params, query, body } = req;
-  user.update(userId, name, email, performer, zipcode, photoURL, bio, cashappURL, attendingEventId)
+  user.update(userId, name, email, zipcode, photo, bio, cashappURL)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      //handle errors to reflect 400/500
+      res.sendStatus(400);
+    });
+};
+
+const addAttendingEvent = (req, res, next) => {
+  const { params: { userId, eventId } } = req;
+  user.addAttendingEvent(userId, eventId)
     .then(() => {
       res.sendStatus(200);
     })
@@ -71,6 +79,7 @@ module.exports = {
   },
   put: {
     updateUser,
+    addAttendingEvent,
   },
   delete: {
     deleteEvent,

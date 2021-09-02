@@ -42,6 +42,7 @@ const App = () => {
   const fetchSessionInfo = () => {
     if (Cookies.get('token')) {
       const tokens = (Cookies.get('token')).split('.');
+      setLoggedIn(true);
       setCurrentUser(JSON.parse(atob(tokens[1])));
     }
   };

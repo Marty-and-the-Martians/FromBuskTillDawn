@@ -22,14 +22,14 @@ const CalRow = (props) => {
     return strTime;
   };
   const prettyTime = formatTime(timeObj);
-  console.log(timeObj);
+  // console.log(timeObj);
 
   const addToMyEvents = (e) => {
     console.log(e);
   };
 
   const rowStyle = (() => {
-    if (currentUser === owner.name) {
+    if (currentUser === owner[0].name) {
       return {
         display: 'flex',
         flexDirection: 'row',
@@ -44,6 +44,8 @@ const CalRow = (props) => {
     };
   })();
 
+  // console.log(owner)
+
   return (
     <div
       style={rowStyle}
@@ -53,7 +55,7 @@ const CalRow = (props) => {
         alt="avatar of this busker"
         style={{ maxHeight: '2rem', maxWidth: '2rem' }}
       />
-      <div onClick={userNameClick} name={owner.name} style={{ cursor: 'pointer' }}>{owner.name}</div>
+      <div onClick={userNameClick} name={owner[0].name} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
       <div>{genre}</div>
       <div>{eventDay}</div>
       <div>{prettyTime}</div>

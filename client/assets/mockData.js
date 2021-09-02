@@ -119,7 +119,7 @@ const mockEvents = [
       lat: 39.742721,
       lng: -104.991321,
     },
-    distance: 2.43, // in miles
+    distance: 75, // in miles
     genre: 'Chainsaw Juggling',
     description: 'He genuinely may hurt himself. Limited shows!!',
   },
@@ -185,23 +185,6 @@ const myEvents = {
       },
       genre: 'Cool guitar noises',
       description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
-    },
-    {
-      _id: 4,
-      time: new Date(),
-      owner: {
-        _id: 69,
-        name: 'JJ',
-        photo:
-          'https://gravatar.com/avatar/11c2e8cbf73864f8a3ced656f29d2f81?s=400&d=robohash&r=x',
-      },
-      position: {
-        lat: 39.742021,
-        lng: -104.991521,
-      },
-      distance: 2.43, // in miles
-      genre: 'Chainsaw Juggling',
-      description: 'asakdjfh;saldkfh',
     },
   ],
 };

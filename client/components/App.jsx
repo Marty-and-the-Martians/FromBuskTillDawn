@@ -10,6 +10,7 @@ import Home from './Home';
 import Login from './Login';
 import NavBar from './NavBar';
 import AccountDetails from './AccountDetails';
+import cleanMyCal from '../helperFuncs/cleanMyCal';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -21,9 +22,6 @@ const App = () => {
     lng: -104.9903,
   });
   const [currentUser, setCurrentUser] = useState({});
-  const userNameClick = (e) => {
-    console.log(e);
-  };
   const [events, setEvents] = useState([]);
   const [newEventLoc, setNewEventLoc] = useState({
     lat: null,
@@ -31,20 +29,32 @@ const App = () => {
   });
   const [selected, setSelected] = useState(null);
   const [addEventPopupOpen, setAddEventPopupOpen] = useState(false);
-
-  useEffect(() => {
+  const eventFetch = () => {
     axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
-      .then((results) => { setEvents(results.data); });
-  }, []);
+      .then((results) => { console.log('proximity: ', results.data); setEvents(results.data); });
+  };
 
-  useEffect(() => {
-    axios.get(`/api/event?lng=${center.lng}&lat=${center.lat}`, { date: new Date().toString() })
-      .then((results) => { setEvents(results.data); });
-  }, [center]);
+  const myCalendar = () => {
+    // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
+    axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
+      .then((results) => console.log('mySchedule: ', results.data,
+      // cleanMyCal(results.data)
+      ));
+  };
+
+  const userNameClick = (e) => {
+    console.log(e);
+  };
+
+  useEffect(eventFetch, []);
+
+  useEffect(eventFetch, [center]);
 
   return (
     <>
       <AppContext.Provider value={{
+        eventFetch,
+        myCalendar,
         setLoggedIn,
         setAccountDeetsShowing,
         setBtnPath,
@@ -66,6 +76,7 @@ const App = () => {
         selected,
         center,
         addEventPopupOpen,
+        currentUser,
       }}
       >
         <div>

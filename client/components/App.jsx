@@ -55,6 +55,8 @@ const App = () => {
         setAddEventPopupOpen,
         userNameClick,
         setCurrentUser,
+        setCenter,
+        currentUser,
         loggedIn,
         accountDeetsShowing,
         btnPath,
@@ -62,9 +64,7 @@ const App = () => {
         events,
         newEventLoc,
         selected,
-        setSelected,
         center,
-        setCenter,
         addEventPopupOpen,
       }}
       >

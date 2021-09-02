@@ -89,7 +89,7 @@ const MapViewer = () => {
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={8}
+        zoom={13}
         center={center}
         onCenterChanged={() => {
         }}

@@ -88,8 +88,12 @@ const createOne = async (time, ownerId, lng, lat, genre, description) => {
 };
 
 // ////////////////////////      UPDATE      ////////////////////////////////////
-const updateOne = async (eventId, time, position, genre, description) => {
+const updateOne = async (eventId, updatedInfo) => {
   try {
+    return await Event
+      .updateOne({
+        _id: mongoose.Types.ObjectId(eventId),
+      }, updatedInfo);
   } catch (err) {
     throw new Error('Error querying DB', { cause: err });
   }

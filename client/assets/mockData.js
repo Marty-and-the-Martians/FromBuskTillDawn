@@ -208,7 +208,7 @@ const myEvents = {
 
 const theirEvents = {
   _id: myEvents._id,
-  hostedEvents: myEvents.hostedEvetns,
+  hostedEvents: myEvents.hostedEvents,
 };
 
 export default {

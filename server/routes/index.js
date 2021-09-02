@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { user, map, event } = require('../controllers');
+const { user, event } = require('../controllers');
 const { loginUser } = require('./AuthAPI/login');
 const { registerUser } = require('./AuthAPI/register');
 

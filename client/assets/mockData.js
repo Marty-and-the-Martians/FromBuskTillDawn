@@ -9,19 +9,6 @@ const user = {
   bio: 'dkafshll;alhfjkalhdflkjdhasfjlhdf',
   followers: 42,
   cashappURL: 'URL_STRING',
-  hostedEvents: [
-    {
-      _id: 1,
-      time: new Date(),
-      position: {
-        lat: 39.742043,
-        lng: -104.991531,
-      },
-      distance: 3.81,
-      genre: 'Progressive Ska',
-      description: 'adskfjhkjafd;alkjfl;kaJDSFASK;LF',
-    },
-  ],
 };
 
 const user2 = {
@@ -219,9 +206,16 @@ const myEvents = {
   ],
 };
 
+const theirEvents = {
+  _id: myEvents._id,
+  hostedEvents: myEvents.hostedEvetns,
+};
+
 export default {
   user,
   user2,
   mockEvents,
   loggedOnUser,
+  myEvents,
+  theirEvents,
 };

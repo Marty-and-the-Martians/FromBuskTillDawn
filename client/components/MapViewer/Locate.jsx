@@ -1,8 +1,8 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
 
 const Locate = ({ panTo }) => (
-  <input
-    type="button"
+  <Button
     onClick={() => {
       navigator.geolocation.getCurrentPosition((location) => {
         panTo({
@@ -11,8 +11,9 @@ const Locate = ({ panTo }) => (
         });
       }, () => null);
     }}
-    value="Center Map"
-  />
+  >
+    Center Map
+  </Button>
 );
 
 export default Locate;

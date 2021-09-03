@@ -42,6 +42,11 @@ const Search = ({ panTo }) => {
           }}
           disabled={!ready}
           placeholder="Select A Location"
+          style={{
+            border: 'none',
+            borderBottom: '1px solid gray',
+            fontSize: '1.113em',
+          }}
         />
         <ComboboxPopover>
           <ComboboxList>

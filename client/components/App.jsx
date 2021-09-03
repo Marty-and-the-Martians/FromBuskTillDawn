@@ -40,8 +40,8 @@ const App = () => {
   };
 
   const fetchSessionInfo = () => {
-    if (Cookies.get('token')) {
-      const tokens = (Cookies.get('token')).split('.');
+    if (window.sessionStorage.token) {
+      const tokens = (window.sessionStorage.token).split('.');
       setLoggedIn(true);
       setCurrentUser(JSON.parse(atob(tokens[1])));
     }
@@ -104,7 +104,7 @@ const App = () => {
           <Route exact path="/account">
             <AccountDetails />
           </Route>
-          <Route path="/performer">
+          <Route exact path="/performer">
             <PerformerProfile />
           </Route>
         </Switch>

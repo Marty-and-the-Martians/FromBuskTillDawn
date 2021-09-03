@@ -50,13 +50,11 @@ const CalViews = () => {
     if (loggedIn) {
       axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
         .then((results) => {
-          console.log('results', results);
           const cleaned = (cleanMyCal(results.data))[0];
           setEventsAttending(cleaned);
-          console.log('cleaned', cleaned);
         });
     }
-  }, [loggedIn]);
+  }, [loggedIn, events.length]);
 
   useEffect(() => {
     if (events.length) {
@@ -82,7 +80,7 @@ const CalViews = () => {
         <TableBody>
           {sortedEvents.map((event) => (
 
-            <CalRow event={event} key={event._id} minus={eventsAttending.some((currEvent) => (currEvent._id === event._id))} />
+            <CalRow event={event} key={event._id} minus={eventsAttending.some((currEvent) => (currEvent._id === event._id))} eventsAttending={eventsAttending} setEventsAttending={setEventsAttending} />
           ))}
         </TableBody>
         {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>

@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import useStyles from '../../hooks/useStyles';
 import AppContext from '../../../context';
 
-const CalRow = ({ event, minus }) => {
+const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
   const classes = useStyles();
   const {
     time, owner, genre, distance,
@@ -21,17 +21,8 @@ const CalRow = ({ event, minus }) => {
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
   const {
-    currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected,
+    currentUser, eventFetch, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected, setEvents, events,
   } = useContext(AppContext);
-  // const [attending, setAttending] = useState(false);
-  // let attending = false;
-  // useEffect(() => {
-  //   eventsAttending.forEach((currEvent) => {
-  //     if (currEvent._id === event._id) {
-  //       setAttending(true);
-  //     }
-  //   });
-  // }, []);
 
   const formatTime = (date) => {
     let hours = date.getHours();
@@ -51,7 +42,31 @@ const CalRow = ({ event, minus }) => {
     const userId = currentUser.id;
     axios
       .put(`/api/user/${userId}/${eventId}`)
-      .then(myCalendar());
+      .then(setEventsAttending([...eventsAttending, event]))
+      .then(eventFetch());
+  };
+
+  const removeEvent = (e, eventId) => {
+    const userId = currentUser.id;
+    if (performerId === userId) {
+      axios.delete(`/api/event/${eventId}`)
+        .then(() => {
+          const copy = events.slice();
+          const idx = copy.findIndex((event) => (event._id === eventId));
+          copy.splice(idx, 1);
+          setEvents(copy);
+        })
+        .then(myCalendar());
+    } else {
+      axios.delete(`/api/user/${userId}/${eventId}`)
+      .then(() => {
+        const copy = eventsAttending.slice();
+        const idx = copy.findIndex((event) => (event._id === eventId));
+        copy.splice(idx, 1);
+        setEventsAttending(copy);
+      })
+        .then(eventFetch());
+    }
   };
 
   const userNameClick = (e, id) => {
@@ -78,7 +93,7 @@ const CalRow = ({ event, minus }) => {
   if (currentPerformerProfile.length) {
     return <Redirect to="/performer" />;
   }
-  console.log(minus);
+  // console.log(minus);
   return (
     <TableRow onClick={() => { setSelected(event); console.log(event); }} color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
       <TableCell>
@@ -109,7 +124,7 @@ const CalRow = ({ event, minus }) => {
             <Button
               type="button"
               value={event._id}
-              onClick={(e) => { addToMyEvents(e, event._id); }}
+              onClick={(e) => { removeEvent(e, event._id); }}
               className={classes.btn}
             >
               -

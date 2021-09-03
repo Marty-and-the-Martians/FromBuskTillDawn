@@ -67,6 +67,8 @@ const useStyles = makeStyles((theme) => (
     myProfilePhoto: {
       width: '10em',
       height: '10em',
+    logins: {
+      padding: '2.25rem 5rem',
     },
     // toolbar: theme.mixins.toolbar,
     // main: {

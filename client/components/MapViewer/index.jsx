@@ -75,7 +75,7 @@ const MapViewer = () => {
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
   return (
-    <div style={{ width: '100%', height: '50vh' }}>
+    <div style={{ width: '100%', height: '80vh' }}>
       <span style={{
         position: 'absolute',
         zIndex: '5',

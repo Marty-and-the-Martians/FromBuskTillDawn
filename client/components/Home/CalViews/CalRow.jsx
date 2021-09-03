@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import Avatar from '@material-ui/core/Avatar';
 import useStyles from '../../hooks/useStyles';
 import AppContext from '../../../context';
 
-const CalRow = ({ event }) => {
+const CalRow = ({ event, minus }) => {
   const classes = useStyles();
   const {
     time, owner, genre, distance,
@@ -20,7 +20,19 @@ const CalRow = ({ event }) => {
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected } = useContext(AppContext);
+  const {
+    currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected,
+  } = useContext(AppContext);
+  // const [attending, setAttending] = useState(false);
+  // let attending = false;
+  // useEffect(() => {
+  //   eventsAttending.forEach((currEvent) => {
+  //     if (currEvent._id === event._id) {
+  //       setAttending(true);
+  //     }
+  //   });
+  // }, []);
+
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -66,9 +78,9 @@ const CalRow = ({ event }) => {
   if (currentPerformerProfile.length) {
     return <Redirect to="/performer" />;
   }
-
+  console.log(minus);
   return (
-    <TableRow  onClick={() => { setSelected(event); console.log(event); }} color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
+    <TableRow onClick={() => { setSelected(event); console.log(event); }} color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
       <TableCell>
         <Avatar
           alt={owner[0].name}
@@ -93,7 +105,16 @@ const CalRow = ({ event }) => {
       <TableCell>{`${distance.toFixed(2)} mi.`}</TableCell>
       <TableCell>
         {
-          currentUser.name !== owner[0].name ? (
+          minus ? (
+            <Button
+              type="button"
+              value={event._id}
+              onClick={(e) => { addToMyEvents(e, event._id); }}
+              className={classes.btn}
+            >
+              -
+            </Button>
+          ) : (
             <Button
               type="button"
               value={event._id}
@@ -102,7 +123,7 @@ const CalRow = ({ event }) => {
             >
               +
             </Button>
-          ) : (null)
+          )
         }
       </TableCell>
     </TableRow>

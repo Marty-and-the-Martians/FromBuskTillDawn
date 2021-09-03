@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+
+import CalRowContainer from './CalRowContainer';
 
 import useStyles from '../../hooks/useStyles';
 import AppContext from '../../../context';
@@ -59,12 +60,12 @@ const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
         .then(myCalendar());
     } else {
       axios.delete(`/api/user/${userId}/${eventId}`)
-      .then(() => {
-        const copy = eventsAttending.slice();
-        const idx = copy.findIndex((event) => (event._id === eventId));
-        copy.splice(idx, 1);
-        setEventsAttending(copy);
-      })
+        .then(() => {
+          const copy = eventsAttending.slice();
+          const idx = copy.findIndex((event) => (event._id === eventId));
+          copy.splice(idx, 1);
+          setEventsAttending(copy);
+        })
         .then(eventFetch());
     }
   };
@@ -74,38 +75,22 @@ const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
     setcurrentPerformerProfile(id);
   };
 
-  const rowStyle = (() => {
-    if (currentUser.name === owner[0].name) {
-      return {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        border: 'solid 1px #e5c163',
-      };
-    }
-    return {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    };
-  })();
-
   if (currentPerformerProfile.length) {
     return <Redirect to="/performer" />;
   }
-  // console.log(minus);
+
   return (
-    <TableRow onClick={() => { setSelected(event); console.log(event); }} color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
-      <TableCell>
+    <CalRowContainer
+      onClick={() => {
+        setSelected(event); console.log(event);
+      }}
+      styled={currentUser.name === owner[0].name}
+    >
+      <TableCell className={classes.smallCell}>
         <Avatar
           alt={owner[0].name}
           src={owner[0].photo}
         />
-        {/* <img
-          src={owner.photo}
-          alt="avatar of this busker"
-          style={{ maxHeight: '2rem', maxWidth: '2rem' }}
-        /> */}
       </TableCell>
       <TableCell
         onClick={(e) => { userNameClick(e, performerId); }}
@@ -114,11 +99,11 @@ const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
       >
         {owner[0].name}
       </TableCell>
-      <TableCell>{genre}</TableCell>
-      <TableCell>{eventDay}</TableCell>
-      <TableCell>{prettyTime}</TableCell>
-      <TableCell>{`${distance.toFixed(2)} mi.`}</TableCell>
-      <TableCell>
+      <TableCell className={classes.bigCell}>{genre}</TableCell>
+      <TableCell className={classes.bigCell}>{eventDay}</TableCell>
+      <TableCell className={classes.bigCell}>{prettyTime}</TableCell>
+      <TableCell className={classes.bigCell}>{`${distance.toFixed(2)} mi.`}</TableCell>
+      <TableCell className={classes.smallCell}>
         {
           minus ? (
             <Button
@@ -141,25 +126,7 @@ const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
           )
         }
       </TableCell>
-    </TableRow>
-    // <div
-    //   style={rowStyle}
-    //   value={event._id}
-    // >
-    //   <img
-    //     src={owner.photo}
-    //     alt="avatar of this busker"
-    //     style={{ maxHeight: '2rem', maxWidth: '2rem' }}
-    //   />
-    //   <div onClick={userNameClick} id={performerId} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
-    //   <div>{genre}</div>
-    //   <div>{eventDay}</div>
-    //   <div>{prettyTime}</div>
-    //   <div>{`${distance.toFixed(2)} miles`}</div>
-    //   {currentUser.name === owner[0].name
-    //     ? <div />
-    //     : <button type="button" value={event._id} onClick={addToMyEvents} style={{ cursor: 'pointer' }}> + </button>}
-    // </div>
+    </CalRowContainer>
   );
 };
 export default CalRow;

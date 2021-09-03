@@ -14,6 +14,7 @@ import useStyles from '../../hooks/useStyles';
 import cleanMyCal from '../../../helperFuncs/cleanMyCal';
 
 import CalRow from './CalRow';
+import StyledTableHeader from '../../StyledMaterialComponents/StyledTableHeader';
 
 const CalViews = () => {
   const classes = useStyles();
@@ -66,15 +67,15 @@ const CalViews = () => {
     <TableContainer className={classes.tableContainer} component={Paper}>
       <Table className={classes.table}>
         <TableHead>
-          <TableRow>
-            <TableCell />
+          <StyledTableHeader>
+            <TableCell className={classes.smallCell} />
             <TableCell onClick={sortName} className={classes.colName}>Busker</TableCell>
             <TableCell onClick={sortGenre} className={classes.colName}>Genre</TableCell>
             <TableCell onClick={sortTime} className={classes.colName}>Date</TableCell>
             <TableCell onClick={sortTime} className={classes.colName}>Time</TableCell>
             <TableCell onClick={sortDistance} className={classes.colName}>Distance</TableCell>
-            <TableCell />
-          </TableRow>
+            <TableCell className={classes.smallCell} />
+          </StyledTableHeader>
         </TableHead>
 
         <TableBody>

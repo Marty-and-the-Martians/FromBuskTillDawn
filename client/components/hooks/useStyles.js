@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => (
     },
     pane: {
       width: '50%',
-      minWidth: '450px',
+      minWidth: '650px',
       marginBottom: '1rem',
     },
     viewWindow: {
@@ -20,18 +20,43 @@ const useStyles = makeStyles((theme) => (
     },
     tableContainer: {
       height: '100%',
+      overflow: 'hidden',
     },
     colName: {
       cursor: 'pointer',
+      width: '17%',
     },
-    row: {
-      width: '100%',
+    bigCell: {
+      width: '17%',
+    },
+    smallCell: {
+      width: '7%',
     },
     userName: {
       cursor: 'pointer',
+      width: '17%',
     },
     btn: {
       cursor: 'pointer',
+    },
+    calBarBtn: {
+      height: ' 3rem',
+    },
+    calendarToolbar: {
+      display: 'flex',
+      flexwrap: 'wrap',
+      alignItem: 'center',
+      justifyContent: 'space-evenly',
+    },
+    dateInput: {
+      display: 'flex',
+      width: 'max-content',
+    },
+    calBtnGroup: {
+      alignItems: 'center',
+    },
+    mapToobar: {
+      display: 'flex',
     },
     // toolbar: theme.mixins.toolbar,
     // main: {

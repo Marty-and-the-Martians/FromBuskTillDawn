@@ -2,12 +2,16 @@ import React, { useContext, useCallback, useRef } from 'react';
 import {
   GoogleMap, useLoadScript, Marker, InfoWindow, useGoogleMap,
 } from '@react-google-maps/api';
+
+import Container from '@material-ui/core/Container';
+
 import Search from './Search';
 import Locate from './Locate';
 import NewEventForm from './NewEventForm';
 import keys from '../../../config/config';
 import mapStyles from './mapStyles';
 import AppContext from '../../context';
+import useStyles from '../hooks/useStyles';
 
 const mapContainerStyle = {
   width: '100%',
@@ -21,6 +25,7 @@ const options = {
 const libraries = ['places'];
 
 const MapViewer = () => {
+  const classes = useStyles();
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: keys.google.API_KEY,
     libraries,
@@ -75,17 +80,11 @@ const MapViewer = () => {
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
   return (
-    <div style={{ width: '100%', height: '80vh' }}>
-      <span style={{
-        position: 'absolute',
-        zIndex: '5',
-        marginLeft: '15em',
-        display: 'flex',
-      }}
-      >
+    <div style={{ width: '100%', height: '50vmax', minHeight: '440px', maxHeight: '650px' }}>
+      <Container className={classes.MapToolbar}>
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
-      </span>
+      </Container>
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -135,8 +134,8 @@ const MapViewer = () => {
             }}
           >
             <>
-              <div>Description: {selected.description}</div>
               <div>Genre: {selected.genre}</div>
+              <div>Description: {selected.description}</div>
               <div>
                 {new Date(selected.time).toString().split(' ').slice(0, 3).join(' ')}
                 {' at '}

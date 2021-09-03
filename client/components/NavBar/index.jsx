@@ -39,6 +39,9 @@ const NavBar = () => {
     window.sessionStorage.removeItem('token');
     setLoggedIn(false);
     setCurrentUser({});
+    setBtnText('Login');
+    setBtnPath('/login');
+    history.push('/');
   };
 
   const handleProfileLeave = () => {
@@ -68,7 +71,7 @@ const NavBar = () => {
           {currentPerformerProfile
             ? <Button onClick={handleProfileLeave}>Back</Button>
             : <Button><Link onClick={handleClick} to={btnPath}>{btnText}</Link></Button>}
-          {loggedIn
+          {loggedIn && !currentPerformerProfile
             ? <Button onClick={handleLogout}>Logout</Button>
             : null }
         </ButtonGroup>

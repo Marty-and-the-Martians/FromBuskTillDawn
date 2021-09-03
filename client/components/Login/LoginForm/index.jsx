@@ -16,12 +16,12 @@ const LoginForm = ({ setShowSignUpForm }) => {
     axios
       .post('/api/login', data)
       .then((res) => {
+        window.sessionStorage.token = res.data.token;
         const tokens = (res.data.token).split('.');
         setCurrentUser(JSON.parse(atob(tokens[1])));
       })
       .then(() => { setSubmitted(true); setLoggedIn(true); })
       .catch((err) => {
-        console.log(err);
         const errKeys = Object.keys(err.response.data);
         setLoginErrors(err.response.data[errKeys[0]]);
       });

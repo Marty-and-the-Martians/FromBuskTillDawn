@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Cookies from 'js-cookie';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -28,7 +27,7 @@ const NavBar = () => {
   };
 
   const handleLogout = () => {
-    Cookies.remove('token');
+    window.sessionStorage.removeItem('token');
     setLoggedIn(false);
     setCurrentUser({});
   };

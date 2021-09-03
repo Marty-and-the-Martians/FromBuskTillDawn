@@ -58,6 +58,9 @@ const useStyles = makeStyles((theme) => (
     mapToobar: {
       display: 'flex',
     },
+    logins: {
+      padding: '2.25rem 5rem',
+    },
     // toolbar: theme.mixins.toolbar,
     // main: {
     //   display: 'flex',

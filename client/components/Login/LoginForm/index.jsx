@@ -4,13 +4,23 @@ import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Redirect } from 'react-router-dom';
+
+// Material UI Imports
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import AppContext from '../../../context';
+import useStyles from '../../hooks/useStyles';
 
 const LoginForm = ({ setShowSignUpForm }) => {
   const [loginErrors, setLoginErrors] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const { setLoggedIn, setCurrentUser } = useContext(AppContext);
   const { register, handleSubmit } = useForm();
+
+  const classes = useStyles();
 
   const handleLogin = (data) => {
     axios
@@ -32,29 +42,27 @@ const LoginForm = ({ setShowSignUpForm }) => {
   }
 
   return (
-    <>
+    <Container className={classes.logins}>
       {loginErrors
         ? (
-          <div> Invalid credentials: {loginErrors} </div>
+          <Typography variant="h5" component="h4">
+            {`Invalid credentials: ${loginErrors}`}
+          </Typography>
         )
-        : null}
+        : (
+          <Typography variant="h5" component="h4">
+            Login For Buskers!
+          </Typography>
+        )}
       <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(handleLogin)}>
-        <label>
-          Email:
-          <input type="text" {...register('email')} />
-        </label>
-        <label>
-          Password:
-          <input type="password" {...register('password')} />
-        </label>
-        <input type="submit" value="Log in!" />
-        <div>
-          Not a member?
-          {' '}
-          <em onClick={() => { setShowSignUpForm(true); }}>Sign Up</em>
-        </div>
+        <TextField required label="Email" {...register('email')} />
+        <TextField required label="Password" type="password" {...register('password')} />
+        <Button type="submit" variant="contained"> Log In! </Button>
+        <Typography>
+        <Button onClick={() => { setShowSignUpForm(true); }}>Not a Member? Sign Up!</Button>
+        </Typography>
       </form>
-    </>
+    </Container>
   );
 };
 

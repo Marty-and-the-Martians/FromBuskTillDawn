@@ -51,7 +51,6 @@ const loginUser = (req, res) => {
             expiresIn: 31556926, // 1 year in seconds
           },
           (err, token) => {
-            res.cookie('token', token);
             res.json({
               success: true,
               token: `Bearer ${token}`,

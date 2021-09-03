@@ -69,6 +69,7 @@ const useStyles = makeStyles((theme) => (
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+    },
     submitBtn: {
       width: '5em',
     },

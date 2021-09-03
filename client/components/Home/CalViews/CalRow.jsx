@@ -4,12 +4,13 @@ import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
 import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 
 import useStyles from '../../hooks/useStyles';
 import AppContext from '../../../context';
+
+import CalRowContainer from './CalRowContainer';
 
 const CalRow = ({ event }) => {
   const classes = useStyles();
@@ -66,19 +67,16 @@ const CalRow = ({ event }) => {
   if (currentPerformerProfile.length) {
     return <Redirect to="/performer" />;
   }
-
+  console.log('currentUser.name === owner[0].name', currentUser.name === owner[0].name);
+  console.log('currentUser.name', currentUser.name);
+  console.log('owner[0].name', owner[0].name);
   return (
-    <TableRow color={currentUser.name === owner[0].name ? 'secondary' : 'primary'}>
-      <TableCell>
+    <CalRowContainer styled={currentUser.name === owner[0].name}>
+      <TableCell className={classes.smallCell}>
         <Avatar
           alt={owner[0].name}
           src={owner[0].photo}
         />
-        {/* <img
-          src={owner.photo}
-          alt="avatar of this busker"
-          style={{ maxHeight: '2rem', maxWidth: '2rem' }}
-        /> */}
       </TableCell>
       <TableCell
         onClick={(e) => { userNameClick(e, performerId); }}
@@ -87,11 +85,11 @@ const CalRow = ({ event }) => {
       >
         {owner[0].name}
       </TableCell>
-      <TableCell>{genre}</TableCell>
-      <TableCell>{eventDay}</TableCell>
-      <TableCell>{prettyTime}</TableCell>
-      <TableCell>{`${distance.toFixed(2)} mi.`}</TableCell>
-      <TableCell>
+      <TableCell className={classes.bigCell}>{genre}</TableCell>
+      <TableCell className={classes.bigCell}>{eventDay}</TableCell>
+      <TableCell className={classes.bigCell}>{prettyTime}</TableCell>
+      <TableCell className={classes.bigCell}>{`${distance.toFixed(2)} mi.`}</TableCell>
+      <TableCell className={classes.smallCell}>
         {
           currentUser.name !== owner[0].name ? (
             <Button
@@ -105,25 +103,7 @@ const CalRow = ({ event }) => {
           ) : (null)
         }
       </TableCell>
-    </TableRow>
-    // <div
-    //   style={rowStyle}
-    //   value={event._id}
-    // >
-    //   <img
-    //     src={owner.photo}
-    //     alt="avatar of this busker"
-    //     style={{ maxHeight: '2rem', maxWidth: '2rem' }}
-    //   />
-    //   <div onClick={userNameClick} id={performerId} style={{ cursor: 'pointer' }}>{owner[0].name}</div>
-    //   <div>{genre}</div>
-    //   <div>{eventDay}</div>
-    //   <div>{prettyTime}</div>
-    //   <div>{`${distance.toFixed(2)} miles`}</div>
-    //   {currentUser.name === owner[0].name
-    //     ? <div />
-    //     : <button type="button" value={event._id} onClick={addToMyEvents} style={{ cursor: 'pointer' }}> + </button>}
-    // </div>
+    </CalRowContainer>
   );
 };
 export default CalRow;

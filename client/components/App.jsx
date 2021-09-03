@@ -5,7 +5,6 @@ import {
   Route,
 } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import AppContext from '../context';
 import Home from './Home';
 import Login from './Login';
@@ -48,13 +47,11 @@ const App = () => {
   };
 
   const myCalendar = () => {
-    // console.log(currentUser.id, ': ', center.lng, ': ', center.lat);
     axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
       .then((results) => { const cleaned = (cleanMyCal(results.data))[0]; setEvents(cleaned); });
   };
 
   useEffect(eventFetch, []);
-
   useEffect(eventFetch, [center, eventFetchDate]);
   useEffect(fetchSessionInfo, []);
   useEffect(eventFetch, [center]);

@@ -35,14 +35,6 @@ const Home = () => {
         <Container>
           <Container className={classes.calendarToolbar} disableGutters>
             <DateInput selectedDate={eventFetchDate} handleChange={handleTimeChange} />
-            {/* <input
-              type="date"
-              value={new Date(eventFetchDate).toISOString().slice(0, 10)}
-              onChange={(event) => {
-                setEventFetchDate(new Date(new Date(event.target.value).getTime() + (6 * 60 * 60 * 1001)).toString());
-                setSelected(null);
-              }}
-            /> */}
             <ButtonGroup className={classes.calBtnGroup}>
               <Button variant="contained" className={classes.calBarBtn} onClick={eventFetch}>Events</Button>
               {currentUser.id

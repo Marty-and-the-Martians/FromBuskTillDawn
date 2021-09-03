@@ -1,16 +1,18 @@
 import React, { useContext } from 'react';
-
 import TableRow from '@material-ui/core/TableRow';
-import StyledTableRow from '../../StyledMaterialComponents/StyledTableRow';
+
 import AppContext from '../../../context';
 
-const CalRowContainer = ({ styled, children, event }) => {
+import StyledTableRow from '../../StyledMaterialComponents/StyledTableRow';
+
+const CalRowContainer = ({ styled, event, children }) => {
   const { setSelected } = useContext(AppContext);
   if (styled) {
     return (
       <StyledTableRow
         onClick={() => {
-          setSelected(event); console.log(event);
+          setSelected(event);
+          console.log(event);
         }}
       >
         {children}
@@ -18,10 +20,12 @@ const CalRowContainer = ({ styled, children, event }) => {
     );
   }
   return (
-    <TableRow hover
+    <TableRow
       onClick={() => {
-        setSelected(event); console.log(event);
+        setSelected(event);
+        console.log(event);
       }}
+      hover
     >
       {children}
     </TableRow>

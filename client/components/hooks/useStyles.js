@@ -58,6 +58,16 @@ const useStyles = makeStyles((theme) => (
     mapToobar: {
       display: 'flex',
     },
+    submitBtn: {
+      width: '5em',
+    },
+    editProfileBtn: {
+      width: '10em',
+    },
+    myProfilePhoto: {
+      width: '10em',
+      height: '10em',
+    },
     // toolbar: theme.mixins.toolbar,
     // main: {
     //   display: 'flex',

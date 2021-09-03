@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import {
+  Typography, Container, TextField, Button,
+} from '@material-ui/core';
+import useStyles from '../hooks/useStyles';
 import AppContext from '../../context';
 
 const EditMyAccount = (props) => {
+  const classes = useStyles();
   const { currentUser, setCurrentUser } = useContext(AppContext);
   const { profileInfo, setIsEditing } = props;
   const {
@@ -35,26 +40,62 @@ const EditMyAccount = (props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Account Settings</h3>
-      <div>{name}</div>
-      <input type="url" value={photoEdit} onChange={(e) => { setPhotoEdit(e.target.value); }} placeholder="Edit Photo URL here" />
-      <input type="email" value={emailEdit} onChange={(e) => { setEmailEdit(e.target.value); }} placeholder="Edit Email here" />
-      <input type="textarea" value={bioEdit} onChange={(e) => { setBioEdit(e.target.value); }} placeholder="Edit Bio here" />
-      <input type="text" value={zipcodeEdit} pattern="[0-9]{5}" onChange={(e) => { setZipcodeEdit(e.target.value); }} placeholder="Edit Zip Code here" />
-      {
-        performer
-          ? (
-            <div>
-              <div>{`Follower Count: ${followers}`}</div>
-              <input type="URL" value={cashappEdit} onChange={(e) => { setCashappEdit(e.target.value); }} placeholder="Edit CashApp URL here" />
+    <>
+      <Container style={{paddingTop: '2.5em'}}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          <Typography variant="h4">Account Settings</Typography>
+          <TextField
+            type="url"
+            value={photoEdit}
+            onChange={(e) => { setPhotoEdit(e.target.value); }}
+            placeholder="Edit Photo URL here"
+            label="Photo URL"
+          />
+          <TextField
+            type="email"
+            value={emailEdit}
+            onChange={(e) => { setEmailEdit(e.target.value); }}
+            placeholder="Edit Email here"
+            label="Email"
+          />
+          <TextField
+            type="textarea"
+            value={bioEdit}
+            onChange={(e) => { setBioEdit(e.target.value); }}
+            placeholder="Edit Bio here"
+            label="Bio"
+          />
+          <TextField
+            type="text"
+            value={zipcodeEdit}
+            pattern="[0-9]{5}"
+            onChange={(e) => { setZipcodeEdit(e.target.value); }}
+            placeholder="Edit Zip Code here"
+            label="Zip Code"
+          />
+          {
+            performer
+              ? (
+                <div>
+                  <TextField
+                    type="URL"
+                    value={cashappEdit}
+                    onChange={(e) => { setCashappEdit(e.target.value); }}
+                    placeholder="Edit CashApp URL here"
+                    label="CashApp URL"
+                  />
 
-            </div>
-          )
-          : null
-      }
-      <input type="submit" value="Done" />
-    </form>
+                </div>
+              )
+              : null
+          }
+          <Button type="submit" variant="contained" className={classes.submitBtn}>Done</Button>
+        </form>
+      </Container>
+    </>
   );
 };
 export default EditMyAccount;

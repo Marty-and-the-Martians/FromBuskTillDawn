@@ -81,9 +81,7 @@ const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
 
   return (
     <CalRowContainer
-      onClick={() => {
-        setSelected(event); console.log(event);
-      }}
+      event={event}
       styled={currentUser.name === owner[0].name}
     >
       <TableCell className={classes.smallCell}>

@@ -81,6 +81,7 @@ const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
 
   return (
     <CalRowContainer
+      event={event}
       onClick={() => {
         setSelected(event); console.log(event);
       }}

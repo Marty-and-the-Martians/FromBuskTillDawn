@@ -4,6 +4,8 @@ import {
 } from '@react-google-maps/api';
 
 import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 import Search from './Search';
 import Locate from './Locate';
@@ -133,18 +135,25 @@ const MapViewer = () => {
               setSelected(null);
             }}
           >
-            <>
-              <div>Genre: {selected.genre}</div>
-              <div>Description: {selected.description}</div>
-              <div>
+            <Container className={classes.eventInfo}>
+              <Avatar
+                alt={selected.owner[0].name}
+                src={selected.owner[0].photo}
+                className={classes.eventAvatarPhoto}
+              />
+              <Typography variant="h5">{selected.owner[0].name}</Typography>
+
+              <Typography variant="h6"><b>Genre:</b>{` ${selected.genre}`}</Typography>
+              <Typography variant="h6">Description: {selected.description}</Typography>
+              <Typography variant="h6">
                 {new Date(selected.time).toString().split(' ').slice(0, 3).join(' ')}
                 {' at '}
                 {formatTime(new Date(selected.time))}
-              </div>
-            </>
+              </Typography>
+            </Container>
           </InfoWindow>
         ) : (
-          <></>
+          <Typography variant="h4">Please Login to Add Events</Typography>
         )}
       </GoogleMap>
     </div>

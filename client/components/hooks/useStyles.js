@@ -58,6 +58,18 @@ const useStyles = makeStyles((theme) => (
     mapToobar: {
       display: 'flex',
     },
+    eventDescriptionName: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    eventAvatarPhoto: {
+      display: 'inline-block',
+    },
+    eventInfo: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
     // toolbar: theme.mixins.toolbar,
     // main: {
     //   display: 'flex',

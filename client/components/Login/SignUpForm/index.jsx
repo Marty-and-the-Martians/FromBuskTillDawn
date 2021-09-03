@@ -3,8 +3,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import useStyles from '../../hooks/useStyles';
 
 const SignUpForm = ({ setShowSignUpForm }) => {
+  const classes = useStyles();
   const [signUpErrors, setSignUpErrors] = useState('');
   const { register, handleSubmit } = useForm();
 
@@ -19,36 +26,21 @@ const SignUpForm = ({ setShowSignUpForm }) => {
   };
 
   return (
-    <div>
+    <Container className={classes.logins}>
       {signUpErrors
         ? (
-          <div>Invalid credentials: {loginErrors}</div>
+          <Typography variant="h5" component="h4">{`Invalid credentials: ${signUpErrors}`}</Typography>
         )
         : null}
       <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={handleSubmit(handleSignUp)}>
-        <label>
-          Desired Username:
-          <input type="text" {...register('name')} />
-        </label>
-        <label>
-          Zipcode:
-          <input type="text" {...register('zipcode')} />
-        </label>
-        <label>
-          Email Address:
-          <input type="text" {...register('email')} />
-        </label>
-        <label>
-          Password:
-          <input type="password" {...register('password')} />
-        </label>
-        <label>
-          Confirm Password:
-          <input type="password" {...register('password2')} />
-        </label>
-        <input type="submit" value="Sign Up!" />
+        <TextField required label="Desired Username" {...register('name')} />
+        <TextField required label="Zipcode" {...register('zipcode')} />
+        <TextField required label="Email" {...register('email')} />
+        <TextField required label="Password" type="password" {...register('password')} />
+        <TextField required label="Confirm Password" type="password" {...register('password2')} />
+        <Button variant="contained" type="submit">Sign Up!</Button>
       </form>
-    </div>
+    </Container>
   );
 };
 

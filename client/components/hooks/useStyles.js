@@ -69,6 +69,18 @@ const useStyles = makeStyles((theme) => (
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+    submitBtn: {
+      width: '5em',
+    },
+    editProfileBtn: {
+      width: '10em',
+    },
+    myProfilePhoto: {
+      width: '10em',
+      height: '10em',
+    },
+    logins: {
+      padding: '2.25rem 5rem',
     },
     // toolbar: theme.mixins.toolbar,
     // main: {

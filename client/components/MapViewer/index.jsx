@@ -68,7 +68,6 @@ const MapViewer = () => {
   }, []);
 
   const formatTime = (date) => {
-    console.log(typeof date);
     let hours = date.getHours();
     let minutes = date.getMinutes();
     const ampm = hours >= 12 ? 'pm' : 'am';
@@ -83,7 +82,7 @@ const MapViewer = () => {
   if (!isLoaded) return 'Loading Maps';
   return (
     <div style={{ width: '100%', height: '50vmax', minHeight: '440px', maxHeight: '650px' }}>
-      <Container className={classes.MapToolbar}>
+      <Container style={{ display: 'flex', justifyContent: 'space-between', height: '2em' }} className={classes.MapToolbar}>
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
       </Container>

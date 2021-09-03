@@ -59,7 +59,7 @@ const NavBar = () => {
     <AppBar position="static">
       <Toolbar className={classes.header}>
         <Typography variant="h4" component="h1">
-          {'Busk til\' Dawn'}
+          {'Busk \'til Dawn'}
         </Typography>
 
         {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">

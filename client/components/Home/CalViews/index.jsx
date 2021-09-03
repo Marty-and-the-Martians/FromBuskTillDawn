@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,6 +11,7 @@ import Paper from '@material-ui/core/Paper';
 
 import AppContext from '../../../context';
 import useStyles from '../../hooks/useStyles';
+import cleanMyCal from '../../../helperFuncs/cleanMyCal';
 
 import CalRow from './CalRow';
 import StyledTableHeader from '../../StyledMaterialComponents/StyledTableHeader';
@@ -17,7 +19,8 @@ import StyledTableHeader from '../../StyledMaterialComponents/StyledTableHeader'
 const CalViews = () => {
   const classes = useStyles();
   const [sortedEvents, setSortedEvents] = useState([]);
-  const { events } = useContext(AppContext);
+  const { events, center, currentUser, loggedIn } = useContext(AppContext);
+  const [eventsAttending, setEventsAttending] = useState([]);
 
   const sortTime = () => {
     setSortedEvents([...events].sort((a, b) => (new Date(a.time) - new Date(b.time))));
@@ -45,7 +48,16 @@ const CalViews = () => {
   };
 
   useEffect(() => {
-    // console.log(events.time);
+    if (loggedIn) {
+      axios.get(`/api/event/${currentUser.id}?lng=${center.lng}&lat=${center.lat}`)
+        .then((results) => {
+          const cleaned = (cleanMyCal(results.data))[0];
+          setEventsAttending(cleaned);
+        });
+    }
+  }, [loggedIn, events.length]);
+
+  useEffect(() => {
     if (events.length) {
       sortTime();
     }
@@ -68,7 +80,8 @@ const CalViews = () => {
 
         <TableBody>
           {sortedEvents.map((event) => (
-            <CalRow event={event} key={event._id} />
+
+            <CalRow event={event} key={event._id} minus={eventsAttending.some((currEvent) => (currEvent._id === event._id))} eventsAttending={eventsAttending} setEventsAttending={setEventsAttending} />
           ))}
         </TableBody>
         {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>

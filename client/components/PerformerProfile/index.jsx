@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import MapViewer from '../MapViewer';
 import React, { useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import AppContext from '../../context';
@@ -58,7 +59,8 @@ const PerformerProfile = () => {
 
   return (
     <>
-      { performerData && performerEvents.length
+      <MapViewer />
+      {performerData && performerEvents.length
         ? (
           <div>
             <h3>Performer Profile </h3>

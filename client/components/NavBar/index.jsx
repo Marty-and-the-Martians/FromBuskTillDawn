@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import React, { useContext, useEffect } from 'react';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,11 +13,20 @@ import useStyles from '../hooks/useStyles';
 
 const NavBar = () => {
   const {
-    setLoggedIn, btnPath, setBtnPath, btnText, setBtnText, loggedIn,
-    accountDeetsShowing, setAccountDeetsShowing, setCurrentUser,
+    setLoggedIn,
+    btnPath,
+    setBtnPath,
+    btnText,
+    setBtnText,
+    loggedIn,
+    accountDeetsShowing,
+    setAccountDeetsShowing,
+    setCurrentUser,
+    currentPerformerProfile,
+    setcurrentPerformerProfile,
   } = useContext(AppContext);
   const classes = useStyles();
-
+  const history = useHistory();
   const location = useLocation();
 
   const handleClick = () => {
@@ -28,9 +36,17 @@ const NavBar = () => {
   };
 
   const handleLogout = () => {
-    Cookies.remove('token');
+    window.sessionStorage.removeItem('token');
     setLoggedIn(false);
     setCurrentUser({});
+    setBtnText('Login');
+    setBtnPath('/login');
+    history.push('/');
+  };
+
+  const handleProfileLeave = () => {
+    setcurrentPerformerProfile('');
+    history.push('/');
   };
 
   useEffect(() => {
@@ -52,12 +68,10 @@ const NavBar = () => {
         <Button color="inherit"> </Button>
         */}
         <ButtonGroup variant="contained" aria-label="text primary button group">
-          <Button>
-            <Link onClick={handleClick} to={btnPath}>
-              {btnText}
-            </Link>
-          </Button>
-          {loggedIn
+          {currentPerformerProfile
+            ? <Button onClick={handleProfileLeave}>Back</Button>
+            : <Button><Link onClick={handleClick} to={btnPath}>{btnText}</Link></Button>}
+          {loggedIn && !currentPerformerProfile
             ? <Button onClick={handleLogout}>Logout</Button>
             : null }
         </ButtonGroup>

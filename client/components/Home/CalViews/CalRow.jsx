@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
@@ -7,12 +7,12 @@ import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 
+import CalRowContainer from './CalRowContainer';
+
 import useStyles from '../../hooks/useStyles';
 import AppContext from '../../../context';
 
-import CalRowContainer from './CalRowContainer';
-
-const CalRow = ({ event }) => {
+const CalRow = ({ event, minus, eventsAttending, setEventsAttending }) => {
   const classes = useStyles();
   const {
     time, owner, genre, distance,
@@ -21,7 +21,10 @@ const CalRow = ({ event }) => {
   const timeObj = new Date(time);
   const dateArr = timeObj.toString().split(' ');
   const eventDay = dateArr.slice(0, 3).join(' ');
-  const { currentUser, myCalendar, currentPerformerProfile, setcurrentPerformerProfile } = useContext(AppContext);
+  const {
+    currentUser, eventFetch, myCalendar, currentPerformerProfile, setcurrentPerformerProfile, setSelected, setEvents, events,
+  } = useContext(AppContext);
+
   const formatTime = (date) => {
     let hours = date.getHours();
     let minutes = date.getMinutes();
@@ -40,7 +43,31 @@ const CalRow = ({ event }) => {
     const userId = currentUser.id;
     axios
       .put(`/api/user/${userId}/${eventId}`)
-      .then(myCalendar());
+      .then(setEventsAttending([...eventsAttending, event]))
+      .then(eventFetch());
+  };
+
+  const removeEvent = (e, eventId) => {
+    const userId = currentUser.id;
+    if (performerId === userId) {
+      axios.delete(`/api/event/${eventId}`)
+        .then(() => {
+          const copy = events.slice();
+          const idx = copy.findIndex((event) => (event._id === eventId));
+          copy.splice(idx, 1);
+          setEvents(copy);
+        })
+        .then(myCalendar());
+    } else {
+      axios.delete(`/api/user/${userId}/${eventId}`)
+        .then(() => {
+          const copy = eventsAttending.slice();
+          const idx = copy.findIndex((event) => (event._id === eventId));
+          copy.splice(idx, 1);
+          setEventsAttending(copy);
+        })
+        .then(eventFetch());
+    }
   };
 
   const userNameClick = (e, id) => {
@@ -48,30 +75,17 @@ const CalRow = ({ event }) => {
     setcurrentPerformerProfile(id);
   };
 
-  const rowStyle = (() => {
-    if (currentUser.name === owner[0].name) {
-      return {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        border: 'solid 1px #e5c163',
-      };
-    }
-    return {
-      display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    };
-  })();
-
   if (currentPerformerProfile.length) {
     return <Redirect to="/performer" />;
   }
-  console.log('currentUser.name === owner[0].name', currentUser.name === owner[0].name);
-  console.log('currentUser.name', currentUser.name);
-  console.log('owner[0].name', owner[0].name);
+
   return (
-    <CalRowContainer styled={currentUser.name === owner[0].name}>
+    <CalRowContainer
+      onClick={() => {
+        setSelected(event); console.log(event);
+      }}
+      styled={currentUser.name === owner[0].name}
+    >
       <TableCell className={classes.smallCell}>
         <Avatar
           alt={owner[0].name}
@@ -91,7 +105,16 @@ const CalRow = ({ event }) => {
       <TableCell className={classes.bigCell}>{`${distance.toFixed(2)} mi.`}</TableCell>
       <TableCell className={classes.smallCell}>
         {
-          currentUser.name !== owner[0].name ? (
+          minus ? (
+            <Button
+              type="button"
+              value={event._id}
+              onClick={(e) => { removeEvent(e, event._id); }}
+              className={classes.btn}
+            >
+              -
+            </Button>
+          ) : (
             <Button
               type="button"
               value={event._id}
@@ -100,7 +123,7 @@ const CalRow = ({ event }) => {
             >
               +
             </Button>
-          ) : (null)
+          )
         }
       </TableCell>
     </CalRowContainer>

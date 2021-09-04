@@ -1,6 +1,6 @@
 ########################## Martian Ignores ##############################
-config.js
-keys.js
+config.local.js
+keys.local.js
 
 
 ########################## node.js Template #############################

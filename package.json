@@ -31,11 +31,13 @@
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "concurrently": "^6.2.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "date-fns": "^2.23.0",
     "express": "^4.17.1",
+    "html-webpack-plugin": "^5.3.2",
     "is-empty": "^1.2.0",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
@@ -44,6 +46,7 @@
     "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "process": "^0.11.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.14.2",
@@ -51,10 +54,8 @@
     "terser-webpack-plugin": "^5.1.4",
     "use-places-autocomplete": "^1.9.4",
     "validator": "^13.6.0",
-    "webpack-merge": "^5.8.0",
     "webpack": "^5.51.1",
-    "clean-webpack-plugin": "^4.0.0-alpha.0",
-    "html-webpack-plugin": "^5.3.2"
+    "webpack-merge": "^5.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

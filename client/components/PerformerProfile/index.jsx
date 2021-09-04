@@ -66,13 +66,6 @@ const PerformerProfile = () => {
     <div> No Events Scheduled </div>
   );
 
-  console.log(
-    'Performer Info: ',
-    performerData,
-    'Event Info: ',
-    performerEvents,
-  );
-
   return (
     <SplitPane
       left={<MapViewer />}

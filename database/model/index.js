@@ -1,13 +1,6 @@
 const mongoose = require('mongoose');
-// const db = require('../../config/keys').mongoURI;
 
 const { Schema } = mongoose;
-
-// Mongo Connect
-// mongoose
-//   .connect(db, { useNewUrlParser: true })
-//   .then(() => console.log('Mongo DB hath done a connect'))
-//   .catch((err) => console.log('MonGod said no. This is why: ', err));
 
 const UserSchema = new Schema({
   name: {

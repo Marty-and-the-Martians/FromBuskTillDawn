@@ -1,6 +1,7 @@
-const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   // set mode to dev to set process.env.NODE_ENV on DefinePlugin to value development
@@ -53,6 +54,9 @@ module.exports = {
       template: './index.html',
       filename: 'index.html',
       inject: 'body',
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
 };

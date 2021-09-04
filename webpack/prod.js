@@ -26,7 +26,7 @@ module.exports = merge(base, {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      process: 'process/browser',
+      process: 'process',
     }),
   ],
 });

@@ -3,7 +3,6 @@ import React from 'react';
 
 const PerformerProfile = (props) => {
   const { profileInfo } = props;
-  console.log(profileInfo);
   const {
     name, performer, followers, hostedEvents, bio, cashappURL, zipcode, photo, email,
   } = profileInfo;

@@ -12,7 +12,6 @@ const CalRowContainer = ({ styled, event, children }) => {
       <StyledTableRow
         onClick={() => {
           setSelected(event);
-          console.log(event);
         }}
       >
         {children}
@@ -23,7 +22,6 @@ const CalRowContainer = ({ styled, event, children }) => {
     <TableRow
       onClick={() => {
         setSelected(event);
-        console.log(event);
       }}
       hover
     >

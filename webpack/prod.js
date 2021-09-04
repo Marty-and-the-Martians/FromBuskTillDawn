@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
 const base = require('./base');
 
 module.exports = merge(base, {
@@ -23,4 +24,9 @@ module.exports = merge(base, {
       }),
     ],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+  ],
 });

@@ -98,7 +98,7 @@ const MapViewer = () => {
         }}
         options={options}
         onClick={handleMapClick}
-        onLoad={onMapLoad}
+        // onLoad={onMapLoad}
       >
         {events.map((event) => (
           <Marker

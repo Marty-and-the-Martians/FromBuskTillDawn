@@ -31,7 +31,7 @@ const MapViewer = () => {
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-scripts',
     googleMapsApiKey: process.env.GOOGLE_MAP_KEY,
-    key: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,
+    // keys.google.API_KEY,
     libraries,
   });
 

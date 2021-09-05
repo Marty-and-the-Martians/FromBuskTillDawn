@@ -32,7 +32,8 @@ const MapViewer = () => {
     googleMapsApiKey: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,
     libraries,
   });
-  console.log(process.env.GOOGLE_MAP_KEY);
+  console.log('Google: ', process.env.GOOGLE_MAP_KEY, 'Secret: ', process.env.PASSPORT_SECRET);
+  console.log('this is just a test');
 
   const {
     events,

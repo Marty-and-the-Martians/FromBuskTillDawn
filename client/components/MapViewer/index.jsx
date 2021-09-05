@@ -28,7 +28,7 @@ const libraries = ['places'];
 
 const MapViewer = () => {
   const classes = useStyles();
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     id: 'google-map-scripts',
     googleMapsApiKey: process.env.GOOGLE_MAP_KEY,
     key: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,

@@ -24,16 +24,16 @@ const options = {
   styles: mapStyles,
 };
 
-const libraries = ['places'];
+// const libraries = ['places'];
 
 const MapViewer = () => {
   const classes = useStyles();
-  const { isLoaded, loadError } = useJsApiLoader({
-    id: 'google-map-scripts',
-    googleMapsApiKey: process.env.GOOGLE_MAP_KEY,
-    key: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,
-    libraries,
-  });
+  // const { isLoaded, loadError } = useJsApiLoader({
+  //   id: 'google-map-scripts',
+  //   googleMapsApiKey: process.env.GOOGLE_MAP_KEY,
+  //   key: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,
+  //   libraries,
+  // });
 
   // console.log('this is just a test');
 
@@ -81,8 +81,8 @@ const MapViewer = () => {
     return strTime;
   };
 
-  if (loadError) return 'Error loading maps';
-  if (!isLoaded) return 'Loading Maps';
+  // if (loadError) return 'Error loading maps';
+  // if (!isLoaded) return 'Loading Maps';
   return (
     <div style={{ width: '100%', height: '50vmax', minHeight: '440px', maxHeight: '650px' }}>
       <Container style={{ display: 'flex', justifyContent: 'space-between', height: '2em' }} className={classes.MapToolbar}>

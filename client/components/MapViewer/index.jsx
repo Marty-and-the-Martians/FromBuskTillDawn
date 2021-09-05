@@ -81,7 +81,7 @@ const MapViewer = () => {
     return strTime;
   };
 
-  if (loadError) return 'Error loading maps';
+  // if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading Maps';
   return (
     <div style={{ width: '100%', height: '50vmax', minHeight: '440px', maxHeight: '650px' }}>

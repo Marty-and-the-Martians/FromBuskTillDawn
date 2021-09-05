@@ -35,7 +35,7 @@ const MapViewer = () => {
     libraries,
   });
 
-  console.log('this is just a test');
+  // console.log('this is just a test');
 
   const {
     events,
@@ -89,7 +89,7 @@ const MapViewer = () => {
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
       </Container>
-
+      <Loadscript googleMapsApiKey={process.env.GOOGLE_MAP_KEY} key={process.env.GOOGLE_MAP_KEY} >
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
@@ -158,6 +158,7 @@ const MapViewer = () => {
           <Typography variant="h4">Please Login to Add Events</Typography>
         )}
       </GoogleMap>
+      </Loadscript>
     </div>
   );
 };

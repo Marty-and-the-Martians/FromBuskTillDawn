@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useRef } from 'react';
 import {
-  GoogleMap, useLoadScript, Marker, InfoWindow, useJsApiLoader, Loadscript,
+  GoogleMap, useLoadScript, Marker, InfoWindow, useJsApiLoader, LoadScript,
 } from '@react-google-maps/api';
 
 import Container from '@material-ui/core/Container';
@@ -89,7 +89,7 @@ const MapViewer = () => {
         <Search panTo={panTo} />
         <Locate panTo={panTo} />
       </Container>
-      <Loadscript googleMapsApiKey={process.env.GOOGLE_MAP_KEY} key={process.env.GOOGLE_MAP_KEY} >
+      <LoadScript googleMapsApiKey={process.env.GOOGLE_MAP_KEY} key={process.env.GOOGLE_MAP_KEY} >
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
@@ -158,7 +158,7 @@ const MapViewer = () => {
           <Typography variant="h4">Please Login to Add Events</Typography>
         )}
       </GoogleMap>
-      </Loadscript>
+      </LoadScript>
     </div>
   );
 };

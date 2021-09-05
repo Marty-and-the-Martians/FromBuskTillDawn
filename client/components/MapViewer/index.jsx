@@ -29,11 +29,12 @@ const libraries = ['places'];
 const MapViewer = () => {
   const classes = useStyles();
   const { isLoaded, loadError } = useLoadScript({
+    id: 'google-map-scripts',
     googleMapsApiKey: process.env.GOOGLE_MAP_KEY,
     key: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,
     libraries,
   });
-  console.log('Google: ', process.env.GOOGLE_MAP_KEY, 'Secret: ', process.env.PASSPORT_SECRET);
+
   console.log('this is just a test');
 
   const {

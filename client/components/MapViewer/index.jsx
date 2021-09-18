@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useRef } from 'react';
 import {
-  GoogleMap, useLoadScript, Marker, InfoWindow, useJsApiLoader,
+  GoogleMap, useLoadScript, Marker, InfoWindow, useGoogleMap,
 } from '@react-google-maps/api';
 
 import Container from '@material-ui/core/Container';
@@ -28,7 +28,7 @@ const libraries = ['places'];
 
 const MapViewer = () => {
   const classes = useStyles();
-  const { isLoaded, loadError } = useJsApiLoader({
+  const { isLoaded, loadError } = useLoadScript({
     id: 'google-map-scripts',
     googleMapsApiKey: process.env.GOOGLE_MAP_KEY,
     key: process.env.GOOGLE_MAP_KEY, // keys.google.API_KEY,

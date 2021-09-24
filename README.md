@@ -8,7 +8,7 @@ Final project for Hackreactor 2021. The Project involved working with a client t
 
 ## Requirements
 
-[Node.js](https://nodejs.org) necessary for running scripts and installing dependencies via 'npm'. 
+[Node.js](https://nodejs.org) necessary for running scripts and installing dependencies via 'npm'.
 
 ## Installation/Setup
 
@@ -21,37 +21,53 @@ Final project for Hackreactor 2021. The Project involved working with a client t
 Here is the public version of [Busk 'til Dawn](https://gentle-ocean-96036.herokuapp.com/)
 
 ## Roadmap
+On page load, you will see the interactive map set to the default location for your area. In the case, Denver. You will also see the calendar of events within 30miles that will take place over the next 24hrs. If you attempt to add an event when not logged in, you will receive a notification instructing you to login in order to add events.
+![altText](./readme-images/2.png)
+
+Curious about events but don't want to login? No worries! You can still click an event to see the details pop up in the map view.
+![altText](./readme-images/3.png)
+
+At this you want to attend the event and realize you may forget. Time to login! Create an account with validation for email, password length, password complexity, and password consistency
+![altText](./readme-images/1.png)
+
+Already have an account? Login to view your existing schedule
+![altText](./readme-images/4.png)
+
+
+
+
+
 
 ## Authors
 
-#### Keanu Hasty  
+#### Keanu Hasty
 <a href="https://github.com/hastyk52" target="_blank">
 <img src=https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
-</a>  
+</a>
 <a href="https://www.linkedin.com/in/keanu-hasty/" target="_blank">
 <img src=https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt=linkedin style="margin-bottom: 5px;" />
 </a>
 
-#### JJ Marquis  
+#### JJ Marquis
 <a href="https://github.com/JJMrqs" target="_blank">
 <img src=https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
-</a>  
+</a>
 <a href="https://www.linkedin.com/in/jj-marquis/" target="_blank">
 <img src=https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt=linkedin style="margin-bottom: 5px;" />
 </a>
 
-#### Jordan Trimarchi 
+#### Jordan Trimarchi
 <a href="https://github.com/Jordan-Trimarchi" target="_blank">
 <img src=https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
-</a>  
+</a>
 <a href="https://www.linkedin.com/in/jordan-trimarchi/" target="_blank">
 <img src=https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt=linkedin style="margin-bottom: 5px;" />
 </a>
 
-#### Alisha Edington 
+#### Alisha Edington
 <a href="https://github.com/alishaedington" target="_blank">
 <img src=https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white alt=github style="margin-bottom: 5px;" />
-</a>  
+</a>
 <a href="https://www.linkedin.com/in/alisha-edington/" target="_blank">
 <img src=https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt=linkedin style="margin-bottom: 5px;" />
 </a>

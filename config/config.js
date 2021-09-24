@@ -1,5 +1,5 @@
 const google = {
-  API_KEY: 'AIzaSyBTw_KHJM5msVvykScq_qnwZDYhxNVR20I',
+  API_KEY: process.env.GOOGLE_MAP_KEY,
 };
 
 module.exports = {

@@ -104,6 +104,3 @@ Find a performer you're excited about? Click their name and you'll see their pub
 <a href="https://www.linkedin.com/in/alisha-edington/" target="_blank">
 <img src=https://img.shields.io/badge/linkedin-%231E77B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white alt=linkedin style="margin-bottom: 5px;" />
 </a>
-
-https://gentle-ocean-96036.herokuapp.com/ -JJ's deployment of Marty and the Martians repo
-https://desolate-citadel-44365.herokuapp.com/- Deployment of forked repo on heroku

@@ -5,7 +5,9 @@
 ## About
 
 Final project for Hackreactor 2021. The Project involved working with a client to develop a full-stack app from the ground up. Busk 'til Dawn is a geolocation application to schedule, plan, and track street performance events. Using Google maps users can view any nearby event pins based on either the users current position or an input location.
+
 Users can schedule their own events by dropping a pin on the map. Users can also track their attending and hosted event schedule and view other user profiles.
+
 User login facilitated through PassportAuth, user data and calendar stores using MongoDB and Mongo Atlas, and geolocation service implemented through MongoDB Geospatial Queries.
 
 ## Requirements

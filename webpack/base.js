@@ -56,6 +56,13 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
     }),
-    new Dotenv({ ignoreStub: true, path: '.env', systemvars: true }),
+    // new webpack.EnvironmentPlugin(['GOOGLE_MAP_KEY']),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     GOOGLE_MAP_KEY: JSON.stringify(process.env),
+    //   },
+    // }),
+    new Dotenv({ ignoreStub: true, systemvars: true }),
+    // new Dotenv({ ignoreStub: true }),
   ],
 };

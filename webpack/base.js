@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   // set mode to dev to set process.env.NODE_ENV on DefinePlugin to value development
@@ -54,5 +56,13 @@ module.exports = {
       filename: 'index.html',
       inject: 'body',
     }),
+    // new webpack.EnvironmentPlugin(['GOOGLE_MAP_KEY']),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     GOOGLE_MAP_KEY: JSON.stringify(process.env),
+    //   },
+    // }),
+    new Dotenv({ ignoreStub: true, systemvars: true }),
+    // new Dotenv({ ignoreStub: true }),
   ],
 };
